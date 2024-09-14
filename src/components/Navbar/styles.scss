@@ -1,0 +1,12 @@
+@import '@styles/variables.scss';
+
+.header-layout {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: $white !important;
+}
+.logo {
+    font-size: 24px;
+    color: $black-12
+}
