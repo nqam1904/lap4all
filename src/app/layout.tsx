@@ -1,17 +1,17 @@
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar/Navbar";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Layout } from "antd";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import Footer from "@/components/Footer/Footer";
-import Navbar from "@/components/Navbar/Navbar";
+import { Montserrat } from "next/font/google";
 
 // global css
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./globals.css";
 
-const roboto = Roboto({
-  weight: ["400", "700"],
+const montserrat = Montserrat({
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <body className={montserrat.className}>
         <AntdRegistry>
           <Layout>
             <Navbar />

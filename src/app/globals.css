@@ -5,15 +5,23 @@ body {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 a {
@@ -21,16 +29,28 @@ a {
   text-decoration: none;
 }
 
-/* CSS SCROLL BAR BROWSER */
-
-::-webkit-scrollbar {
-  width: 10px;
+.ant-layout {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: inherit !important;
+  font-weight: 500;
+  font-size: 16px !important;
+  line-height: 1.5;
+  background: white !important;
+  background-color: white !important;
 }
+
+/* CSS SCROLL BAR BROWSER */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
 ::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: #e7e7e7;
   border: 1px solid #cacaca;
 }
+
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background-color: #007aff;

@@ -1,29 +1,50 @@
 "use client";
-import { Col, Menu, Row } from "antd";
+
+import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 import { Header } from "antd/es/layout/layout";
-import "./styles.scss";
+import Link from "next/link";
+import { useState } from "react";
+import styles from "./navbar.module.scss";
 
 function Navbar() {
+  const [search, setSearch] = useState("");
+
   return (
-    <Header className="header-layout">
-      <Row>
-        <Col flex="100px">
-          <div className="logo">Logo</div>
-        </Col>
-        <Col flex="auto">
-          <Menu
-            // theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-          >
-            <Menu.Item key="1">Trang chủ</Menu.Item>
-            <Menu.Item key="2">Sản phẩm</Menu.Item>
-            <Menu.Item key="3">Dịch vụ</Menu.Item>
-            <Menu.Item key="4">Giới thiệu</Menu.Item>
-            <Menu.Item key="5">Liên hệ</Menu.Item>
-          </Menu>
-        </Col>
-      </Row>
+    <Header className={styles.container}>
+      {/* LOGO */}
+      <div className={styles.logoContainer}>
+        <Link href="/">
+          <p className={styles.logo}>Laptop</p>
+        </Link>
+      </div>
+      {/* INPUT SEARCH */}
+      <div className={styles.inputContainer}>
+        <Input
+          size="large"
+          className={styles.inputAnt}
+          placeholder="Tìm kiếm sản phẩm, thương hiệu, nhiều hơn..."
+          prefix={
+            <SearchOutlined style={{ fontSize: "24px", marginRight: "10px" }} />
+          }
+          allowClear
+          value={search}
+          variant="borderless"
+          onChange={(value) => setSearch(value.target.value)}
+        />
+      </div>
+      {/* RIGHT CONTAINER */}
+      <div className={styles.rightConrtainer}>
+        <Link href="/">
+          <div className={styles.cartContainer}>
+            <ShoppingCartOutlined
+              className={styles.cartIcon}
+              style={{ fontSize: "24px" }}
+            />
+            <span>Cart: {0}</span>
+          </div>
+        </Link>
+      </div>
     </Header>
   );
 }

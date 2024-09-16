@@ -1,0 +1,83 @@
+@import "@styles/variables.scss";
+@import "@styles/breakpoints.scss";
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap");
+
+.container {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: $white !important;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
+    @include md {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 75px !important;
+    }
+
+    .logoContainer {
+        font-family: "Sansita Swashed";
+        display: flex;
+        align-items: center;
+
+        .logo {
+            // height: 1em;
+        }
+
+        @include md {
+            font-size: 32px;
+            padding: 0 20px;
+        }
+    }
+
+    .inputContainer {
+        margin-top: 10px;
+        background-color: transparent;
+        display: none;
+        width: 80%;
+
+        @include md {
+            display: flex;
+        }
+
+        .inputAnt,
+        input,
+        input::placeholder {
+            color: $black_12 !important;
+            font-family: inherit !important;
+
+
+        }
+    }
+
+    .rightConrtainer {
+        display: none;
+        font-weight: bold;
+        margin-left: auto;
+
+        @include md {
+            display: flex;
+        }
+
+        .cartContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 8px;
+            color: $black_12;
+
+            .cartIcon {
+                margin-right: 8px;
+
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
+    }
+}
