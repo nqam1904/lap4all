@@ -1,27 +1,45 @@
 @import "@styles/variables.scss";
 @import "@styles/breakpoints.scss";
+.main {
+  width: 100%;
+  overflow: hidden;
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
+  @include md {
+    flex-direction: row;
+  }
 
-  .page {
-    max-width: 1240px;
-    padding-left: 20px;
-    padding-right: 20px;
+  .header {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    min-height: 100vh;
+    margin-bottom: 40px;
 
-    .main {
-      display: flex;
-      overflow: hidden;
-      flex-direction: column;
-      
+    @include md {
+      flex-direction: row;
+    }
+
+    .title {
+      font-size: 28px;
+      margin: 0;
+
+      .emoji {
+        font-weight: 400;
+        font-family: initial;
+        margin-right: 10px;
+      }
+    }
+
+    .headerButtons {
+      margin-top: 12px;
+
+      .buttons {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
       @include md {
-        flex-direction: row;
-        margin-top: 50px;
+        margin-left: auto;
+        margin-top: 0px;
       }
     }
   }

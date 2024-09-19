@@ -5,6 +5,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
     productionBrowserSourceMaps: true,
+    devIndicators: {
+        autoPrerender: false,
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.ibb.co',
+                port: '',
+                pathname: '',
+            },
+        ],
+    },
+
     webpack: (config) => {
         config.resolve.alias = {
             ...config.resolve.alias,

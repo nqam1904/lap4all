@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 // global css
+import { Categories } from "@/components";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./globals.css";
@@ -33,7 +34,12 @@ export default function RootLayout({
         <AntdRegistry>
           <Layout>
             <Navbar />
-            {children}
+            <div className="container">
+              <div className="page">
+                <Categories />
+                {children}
+              </div>
+            </div>
             <Footer />
           </Layout>
         </AntdRegistry>
