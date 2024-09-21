@@ -9,7 +9,7 @@ import { Montserrat } from "next/font/google";
 import { Categories } from "@/components";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import "./globals.css";
+import "./globals.scss";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "700"],
@@ -35,9 +35,11 @@ export default function RootLayout({
           <Layout>
             <Navbar />
             <div className="container">
-              <div className="page">
-                <Categories />
-                {children}
+              <div className="content">
+                <div className="main">
+                  <Categories />
+                  {children}
+                </div>
               </div>
             </div>
             <Footer />

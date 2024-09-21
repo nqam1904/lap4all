@@ -1,32 +1,25 @@
 "use client";
 
-import { AlignLeftOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { HeaderPage } from "@/components";
+import { getEmoji, getNameCategory } from "@/utils";
 import styles from "./page.module.scss";
 
-export default function Home() {
-  const HeaderPage = () => {
-    return (
-      <div className={styles.header}>
-        <h1 className={styles.title}>
-          <span className={styles.emoji}>⚡</span>Trang chủ
-        </h1>
-        <div className={styles.headerButtons}>
-          <Button
-            icon={<AlignLeftOutlined />}
-            size="large"
-            className={styles.buttons}
-            onClick={() => console.log("click")}
-          >
-            Sort
-          </Button>
-        </div>
-      </div>
-    );
-  };
+function Home() {
+  // const BannerHome = () => {
+  //   return (
+  //     <div className={styles.bannerContainer}>
+  //       {bannerData.map((i: { id: number; url: string }, index: number) => {
+  //         return <Banner key={index} url={i.url} alt="banner" />;
+  //       })}
+  //     </div>
+  //   );
+  // };
+
   return (
-    <main className={styles.main}>
-      <HeaderPage />
+    <main className={styles.home}>
+      <HeaderPage title={getNameCategory("home")} icon={getEmoji("home")} />
+      {/* <BannerHome /> */}
     </main>
   );
 }
+export default Home;

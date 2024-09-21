@@ -1,59 +1,38 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Image from "next/image";
-import Link from "next/link";
-import styles from "./vertical.module.scss";
+import { IVerticalCard } from "@/types";
+import { Card, Image } from "antd";
+import React from "react";
 
-export default function VerticalCard({
-  bgColor,
-  brand,
+const VerticalCard: React.FC<IVerticalCard> = ({
+  loading,
   name,
-  price,
-  sale_price,
-  image,
-  border,
-  href,
-}: any) {
+  thumbnail,
+  shortDescription,
+  alt,
+}) => {
   return (
-    <Link href={href || "#"}>
-      <div
-        className={styles.verticalCard}
-        style={{
-          backgroundColor: bgColor || "",
-          border: border && "2px solid #eee",
-        }}
-      >
-        {sale_price && price && (
-          <button className={styles.favContainer}>
-            {(((price - sale_price) / price) * 100) | 0}%
-          </button>
-        )}
-        <div className={styles.imageContainer}>
-          {image && (
-            <Image
-              fill={true}
-              className={styles.image}
-              src={image}
-              loading="lazy"
-              alt=""
-            />
-          )}
-        </div>
-        <div className={styles.textContainer}>
-          <h4 className={styles.brandText}>{brand}</h4>
-          <h4>{name}</h4>
-          {sale_price ? (
-            <div className={styles.priceContainer}>
-              <div className={styles.prices}>
-                <span className={styles.priceText}>{price}$</span>
-                <span className={styles.salePriceText}>{sale_price}$</span>
-              </div>
-            </div>
-          ) : (
-            <span className={styles.salePriceText}>{price || 0}$</span>
-          )}
-        </div>
-      </div>
-    </Link>
+    <Card
+      loading={loading}
+      bordered
+      cover={
+        <Image
+          alt={alt || ""}
+          src={thumbnail}
+          width={300}
+          // fallback="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg"
+        />
+      }
+    >
+      <Card.Meta
+        title={name || ""}
+        description={
+          <>
+            <p>{shortDescription}</p>
+          </>
+        }
+      />
+    </Card>
   );
-}
+};
+
+export default React.memo(VerticalCard);

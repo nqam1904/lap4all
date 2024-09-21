@@ -1,3 +1,6 @@
+@import "@styles/variables.scss";
+@import "@styles/breakpoints.scss";
+
 html,
 body {
   max-width: 100vw;
@@ -36,8 +39,8 @@ a {
   font-weight: 500;
   font-size: 16px !important;
   line-height: 1.5;
-  background: white !important;
-  background-color: white !important;
+  background: $white !important;
+  background-color: $white !important;
 }
 
 /* MAIN LAYOUT */
@@ -46,15 +49,27 @@ a {
   align-items: center;
   justify-content: center;
   margin-top: 80px;
+
+  .content {
+    max-width: 1440px;
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 35px;
+
+    .main {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    @include md {
+      flex-direction: row;
+      margin-top: 50px;
+    }
+  }
 }
 
-.page {
-  display: flex;
-  max-width: 1240px;
-  width: 100%;
-  min-height: 100vh;
-  margin-top: 35px;
-}
+
 
 /* CSS SCROLL BAR BROWSER */
 ::-webkit-scrollbar {
@@ -69,5 +84,5 @@ a {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: #eb2f96;
+  background-color: $pink_03;
 }

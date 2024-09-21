@@ -14,3 +14,11 @@ export interface IBanner {
   url: string;
   alt?: string;
 }
+
+export interface IVerticalCard {
+  loading: boolean;
+  name?: string;
+  thumbnail?: string;
+  shortDescription?: string;
+  alt?: stirng;
+}
