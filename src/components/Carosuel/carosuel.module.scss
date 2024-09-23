@@ -1,0 +1,22 @@
+@import "@styles/variables.scss";
+@import "@styles/breakpoints.scss";
+
+.slider_container {
+    width: auto;
+    height: 560px;
+
+    .image_item {
+        border-radius: 16px;
+
+        @include md {
+            width: auto;
+            height: 300px;
+        }
+    }
+
+    @include md {
+        width: auto;
+        height: 350px;
+    }
+
+}

@@ -1,10 +1,10 @@
 import { Categories, Layout } from "@/components";
 import Navbar from "@/components/Navbar/Navbar";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 // global css
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./globals.scss";
