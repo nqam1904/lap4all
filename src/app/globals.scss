@@ -10,6 +10,12 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  font-size: 16px !important;
+  line-height: 1.5;
+  background: $white !important;
+  background-color: $white !important;
 }
 
 *,
@@ -32,43 +38,32 @@ a {
   text-decoration: none;
 }
 
-.ant-layout {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: inherit !important;
-  font-weight: 500;
-  font-size: 16px !important;
-  line-height: 1.5;
-  background: $white !important;
-  background-color: $white !important;
-}
-
-/* MAIN LAYOUT */
-.container {
+/* CONTETN LAYOUT */
+.content {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 35px;
 
-  .content {
-    max-width: 1440px;
-    width: 100%;
-    min-height: 100vh;
-    margin-top: 35px;
-
-    .main {
-      display: flex;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    @include md {
-      flex-direction: row;
-      margin-top: 50px;
-    }
+  @include md {
+    flex-direction: column;
+    margin-top: 0
   }
 }
 
+/* OVERRIDE ANT DESIGN */
+.ant-image {
+  // display: unset !important;
+  width: 100%;
+}
+
+.ant-card {
+  font-family: inherit;
+}
+
+.ant-layout-header {
+  padding: unset !important;
+}
 
 
 /* CSS SCROLL BAR BROWSER */
@@ -84,5 +79,5 @@ a {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: $pink_03;
+  background-color: $blue_06;
 }

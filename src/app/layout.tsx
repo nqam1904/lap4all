@@ -1,12 +1,10 @@
-import Footer from "@/components/Footer/Footer";
+import { Categories, Layout } from "@/components";
 import Navbar from "@/components/Navbar/Navbar";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { Layout } from "antd";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 // global css
-import { Categories } from "@/components";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./globals.scss";
@@ -34,15 +32,10 @@ export default function RootLayout({
         <AntdRegistry>
           <Layout>
             <Navbar />
-            <div className="container">
-              <div className="content">
-                <div className="main">
-                  <Categories />
-                  {children}
-                </div>
-              </div>
+            <div className="content">
+              <Categories />
+              {children}
             </div>
-            <Footer />
           </Layout>
         </AntdRegistry>
       </body>

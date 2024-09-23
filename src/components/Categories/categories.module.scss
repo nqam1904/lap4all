@@ -5,12 +5,14 @@
     display: flex;
     height: 100%;
     background-color: $white;
+    margin-bottom: 0px;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    width: 250px;
 
     @include md {
-        width: 250px;
-        margin-bottom: 0px;
+        margin-bottom: 20px;
+        width: 100%;
     }
 
     .title {
@@ -19,25 +21,21 @@
         margin: 0;
 
         @include md {
-            margin-bottom: 12px;
+            display: none;
         }
     }
 
     .categories {
         list-style: none;
-        padding: 0;
-        display: flex;
-        overflow-x: auto;
+        display: list-item;
 
         &::-webkit-scrollbar {
             width: 0px;
-            /* Remove scrollbar space */
             background: transparent;
-            /* Optional: just make scrollbar invisible */
         }
 
         @include md {
-            display: list-item;
+            display: none;
         }
 
         .categoryItem {
@@ -45,25 +43,22 @@
             padding-bottom: 18px;
             display: flex;
             align-items: center;
-            flex-direction: column;
+            width: fit-content;
 
-            @include md {
-                min-width: auto;
-                flex-direction: row;
-            }
+            @include md {}
 
             a {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                min-width: 100px;
-                width: 100%;
                 color: $black_12;
                 font-family: inherit;
+                flex-direction: row;
 
                 @include md {
-                    min-width: auto;
-                    flex-direction: row;
+                    flex-direction: column;
+                    min-width: 100px;
+                    width: 100%;
                 }
             }
 
@@ -71,10 +66,11 @@
                 font-weight: 400;
                 font-size: 18px;
                 margin-bottom: 4px;
+                margin-right: 14px;
+                margin-bottom: 0px;
 
                 @include md {
-                    margin-right: 14px;
-                    margin-bottom: 0px;
+                    margin: 0 auto;
                 }
             }
         }

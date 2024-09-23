@@ -3,43 +3,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap");
 
 .container {
-    position: fixed;
+    display: flex;
     z-index: 1;
     width: 100%;
     background-color: $white !important;
-    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    height: 75px !important;
+    align-items: center;
 
     @include md {
+        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+        margin-bottom: 20px;
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        height: 75px !important;
     }
 
     .logoContainer {
         font-family: "Sansita Swashed";
         display: flex;
         align-items: center;
+        font-size: 32px;
+        margin-left: 20px;
+        margin-right: 20px;
 
         .logo {
-            // height: 1em;
-            color: $pink_03;
+            color: $blue_06;
         }
 
         @include md {
-            font-size: 32px;
-            padding: 0 20px;
+            padding: 0;
+            margin: 0;
         }
     }
 
     .inputContainer {
-        margin-top: 10px;
+        // margin-top: 10px;
         background-color: transparent;
-        display: none;
         width: 80%;
+        display: inline-flex;
+        align-items: center;
 
         @include md {
-            display: flex;
+            display: none;
         }
 
         .inputAnt,
@@ -53,13 +59,7 @@
     }
 
     .rightConrtainer {
-        display: none;
-        font-weight: bold;
-        margin-left: auto;
-
-        @include md {
-            display: flex;
-        }
+        // margin: 0 auto;
 
         .cartContainer {
             display: flex;
@@ -68,17 +68,30 @@
             justify-content: space-between;
             cursor: pointer;
             padding: 8px;
-            color: $black_12;
+            color: $black_17;
+            width: max-content;
 
             .cartIcon {
                 margin-right: 8px;
-
             }
 
             span {
                 font-size: 16px;
                 font-weight: bold;
             }
+
+            @include md {
+                display: none;
+            }
         }
+
+        .drawer {
+            display: none;
+
+            @include md {
+                display: block;
+            }
+        }
+
     }
 }

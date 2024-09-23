@@ -21,4 +21,5 @@ export interface IVerticalCard {
   thumbnail?: string;
   shortDescription?: string;
   alt?: stirng;
+  price?: number;
 }

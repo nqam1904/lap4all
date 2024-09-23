@@ -1,8 +1,11 @@
 "use client";
 
-import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  AlignRightOutlined,
+  SearchOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { Input } from "antd";
-import { Header } from "antd/es/layout/layout";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "./navbar.module.scss";
@@ -11,7 +14,7 @@ function Navbar() {
   const [search, setSearch] = useState("");
 
   return (
-    <Header className={styles.container}>
+    <div className={styles.container}>
       {/* LOGO */}
       <div className={styles.logoContainer}>
         <Link href="/">
@@ -41,11 +44,14 @@ function Navbar() {
               className={styles.cartIcon}
               style={{ fontSize: "24px" }}
             />
-            <span>Cart: {0}</span>
+            <span>{0}</span>
           </div>
         </Link>
+        <div className={styles.drawer}>
+          <AlignRightOutlined style={{ fontSize: "24px" }} />
+        </div>
       </div>
-    </Header>
+    </div>
   );
 }
 

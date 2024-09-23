@@ -3,9 +3,9 @@
 
 .header {
     display: flex;
-    flex-direction: column;
     width: 100%;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
+    justify-content: space-between;
 
     @include md {
         flex-direction: row;
@@ -23,7 +23,6 @@
     }
 
     .headerButtons {
-        margin-top: 12px;
 
         .buttons {
             font-size: 16px;

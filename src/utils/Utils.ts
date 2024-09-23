@@ -37,4 +37,17 @@ function fakeApiCall(data: any) {
   });
 }
 
-export { fakeApiCall, getEmoji, getMillisecondsDifference, getNameCategory };
+function formatPrice(number: string = "0", currencyCode = "VNĐ") {
+  const formattedNumber = number
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return `${formattedNumber} ${currencyCode}`;
+}
+
+export {
+  fakeApiCall,
+  formatPrice,
+  getEmoji,
+  getMillisecondsDifference,
+  getNameCategory,
+};

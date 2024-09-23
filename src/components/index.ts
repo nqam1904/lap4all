@@ -6,6 +6,7 @@ import Footer from "./Footer/Footer";
 import GroupProduct from "./Group/GroupProduct";
 import HeaderPage from "./HeaderPage/HeaderPage";
 import Navbar from "./Navbar/Navbar";
+import Layout from "./Layout/Layout";
 
 export {
   Banner,
@@ -16,4 +17,5 @@ export {
   HorizontalCard,
   Navbar,
   VerticalCard,
+  Layout,
 };

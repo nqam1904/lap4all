@@ -1,34 +1,39 @@
 "use client";
 import { IVerticalCard } from "@/types";
+import { formatPrice } from "@/utils";
 import { Card, Image } from "antd";
 import React from "react";
+import styles from "./vertical.module.scss";
 
 const VerticalCard: React.FC<IVerticalCard> = ({
   loading,
   name,
   thumbnail,
-  shortDescription,
+  price,
   alt,
 }) => {
   return (
     <Card
+      className={styles.container}
       loading={loading}
       bordered
+      hoverable
       cover={
-        <Image
-          alt={alt || ""}
-          src={thumbnail}
-          width={300}
-          // fallback="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg"
-        />
+        !loading ? (
+          <div className={styles.wrapper_image}>
+            <Image alt={alt} src={thumbnail} className={styles.image_item} />
+          </div>
+        ) : (
+          <></>
+        )
       }
     >
       <Card.Meta
-        title={name || ""}
+        title={name}
         description={
-          <>
-            <p>{shortDescription}</p>
-          </>
+          <div className={styles.description}>
+            <p className={styles.price}>{formatPrice(String(price || "0"))}</p>
+          </div>
         }
       />
     </Card>

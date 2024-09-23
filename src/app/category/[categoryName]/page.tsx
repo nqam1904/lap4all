@@ -32,14 +32,7 @@ const CategoryDetails: React.FC<ICategoryDetails> = ({
 
   const renderItem = useMemo(() => {
     return data.map((product, index) => (
-      <VerticalCard
-        key={index}
-        loading={loading}
-        name={product.name}
-        alt={product.alt}
-        thumbnail={product.thumbnail}
-        shortDescription={product.shortDescription}
-      />
+      <VerticalCard key={index} loading={loading} {...product} />
     ));
   }, [loading, data]);
 
@@ -62,6 +55,7 @@ const CategoryDetails: React.FC<ICategoryDetails> = ({
       <HeaderPage
         title={getNameCategory(categoryName)}
         icon={getEmoji(categoryName)}
+        name={categoryName}
       />
       {!!renderItem.length ? (
         <div className={styles.products}>{renderItem}</div>

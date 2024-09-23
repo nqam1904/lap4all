@@ -1,6 +1,7 @@
 "use client";
 
 import { HeaderPage } from "@/components";
+import { ECategories } from "@/constants/enum";
 import { getEmoji, getNameCategory } from "@/utils";
 import styles from "./page.module.scss";
 
@@ -17,7 +18,11 @@ function Home() {
 
   return (
     <main className={styles.home}>
-      <HeaderPage title={getNameCategory("home")} icon={getEmoji("home")} />
+      <HeaderPage
+        title={getNameCategory(ECategories.HOME)}
+        icon={getEmoji(ECategories.HOME)}
+        name={ECategories.HOME}
+      />
       {/* <BannerHome /> */}
     </main>
   );

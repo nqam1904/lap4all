@@ -8,7 +8,6 @@ const Layout = ({
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.main}>
-          {/* {!noCategories && <CategoriesBar />} */}
           {children}
         </div>
       </div>
