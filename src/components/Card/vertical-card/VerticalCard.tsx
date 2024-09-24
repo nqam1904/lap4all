@@ -11,17 +11,25 @@ const VerticalCard: React.FC<IVerticalCard> = ({
   thumbnail,
   price,
   alt,
+  preview = false,
+  bordered = false,
+  hoverable = false,
 }) => {
   return (
     <Card
       className={styles.container}
       loading={loading}
-      bordered
-      hoverable
+      bordered={bordered}
+      hoverable={hoverable}
       cover={
         !loading ? (
           <div className={styles.wrapper_image}>
-            <Image alt={alt} src={thumbnail} className={styles.image_item} />
+            <Image
+              alt={alt}
+              src={thumbnail}
+              className={styles.image_item}
+              preview={preview}
+            />
           </div>
         ) : (
           <></>

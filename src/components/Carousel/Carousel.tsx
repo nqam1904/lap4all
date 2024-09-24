@@ -1,9 +1,9 @@
 "use-client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 
 const Carousel = () => {
-  const settings: any = {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,

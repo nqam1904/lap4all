@@ -22,4 +22,7 @@ export interface IVerticalCard {
   shortDescription?: string;
   alt?: stirng;
   price?: number;
+  preview?: boolean;
+  bordered?: boolean;
+  hoverable?: boolean;
 }

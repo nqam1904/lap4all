@@ -171,5 +171,44 @@ const productData: any[] = [
     price: 1200000,
   },
 ];
-
-export { bannerData, categoriesData, productData };
+const productFeatureData: any[] = [
+  {
+    id: Date.now(),
+    name: "Dell XPS 13 9340",
+    thumbnail:
+      "https://synced.sg/cdn/shop/files/AMOLED-43mm-PartNumber010-02903-18.jpg?v=1725764735&width=800",
+    shortDescription:
+      ' intel Ultra 7 155H 16G 512G 13.4"" FHD+ 120Hz 500nits (New seal) & ( openbox)',
+    alt: "Dell XPS 13",
+    price: 1200000,
+  },
+  {
+    id: Date.now(),
+    name: "Legion Pro 5 OUTLET",
+    thumbnail:
+      "https://synced.sg/cdn/shop/files/F165-PartNumber010-02863-A1.jpg?v=1725764770&width=800",
+    shortDescription: 'i7 13700HX 16G 512G RTX 4060_8G 16"QHD ips 165Hz',
+    alt: "Legion",
+    price: 1200000,
+  },
+  {
+    id: Date.now(),
+    name: "Razer Blade 16 OLED 2024",
+    thumbnail:
+      "https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-6/458794579_1286345369196630_179790497229718910_n.jpg?stp=cp6_dst-jpg&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFovtRq_Sfj55YdSb853QsVxGK96zqwzcXEYr3rOrDNxbHNBxILkp5-p8N3g7ewkvAxN2Qv0DmCGeNm-UzpIYAN&_nc_ohc=MY50xtM50RkQ7kNvgFjb78l&_nc_ht=scontent.fsgn5-5.fna&oh=00_AYCc1ubfIPu2lBo4yBloMR0d4hek42jG3DCpEauCPuvFrA&oe=66F5A1AF",
+    shortDescription: "i9 14900HX ",
+    alt: "Razer",
+    price: 1200000,
+  },
+  {
+    id: Date.now(),
+    name: "MSI Raider GE68 2024",
+    thumbnail:
+      "https://scontent.fsgn5-8.fna.fbcdn.net/v/t39.30808-6/460902998_1295361614961672_1249377549356885191_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHF8fwhtUeOi3_7XSoKYRn7nnVjifKIrciedWOJ8oityKNc3LICBHkuhIW1QNKCYy93kFzxJzYFKKs59Hq24-zj&_nc_ohc=JKy0ACLO3r8Q7kNvgGz0TO0&_nc_ht=scontent.fsgn5-8.fna&_nc_gid=AUaJ5WX_oDQxB4D5JNw874t&oh=00_AYCahsgv6ClBWfcnVHOwljfiIpbNIL37vTAgI4MIaMAbcw&oe=66F57C46",
+    shortDescription:
+      'i9 14900HX 32G 1Tb RTX 4070 8Gb 16"FHD+ 144hzOpen fullbox -thiếu 10 ngàn là đủ 40 triệu',
+    alt: "MSI",
+    price: 1200000,
+  },
+];
+export { bannerData, categoriesData, productData, productFeatureData };

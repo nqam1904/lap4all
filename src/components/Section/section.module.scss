@@ -1,0 +1,56 @@
+@import "@styles/variables.scss";
+@import "@styles/breakpoints.scss";
+
+.container {
+    padding: 50px;
+    background-color: $blue_06;
+    border-radius: 20px;
+    z-index: 1;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+
+        .content_title {
+            text-align: center;
+            font-family: inherit;
+            line-height: calc(41 / 23);
+            margin: 0 auto
+        }
+
+        .content_options {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            justify-content: center;
+            margin-top: 20px;
+
+            @include md {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 15px;
+                height: 260px;
+            }
+
+            .content_options_item {
+                text-align: center;
+                font-size: 16px;
+                font-family: inherit;
+
+                .content_options_title {
+                    font-weight: bold;
+                    font-size: inherit;
+
+                    @include md {}
+                }
+
+                .content_options_sub_title {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
