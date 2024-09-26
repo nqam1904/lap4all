@@ -1,12 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { productFeatureData } from "@/constants/dummy";
 import { fakeApiCall } from "@/utils/Utils";
 import React, { useEffect, useMemo, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import VerticalCard from "../Card/vertical-card/VerticalCard";
 import styles from "./feature.module.scss";
-
-const Feature: React.FC = () => {
+type TFeature = {
+  title: string;
+  subTitle?: string;
+  feature: any[];
+};
+const Feature: React.FC<TFeature> = ({
+  title,
+  subTitle = "",
+  feature = [],
+}) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,7 +58,7 @@ const Feature: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response: any = await fakeApiCall(productFeatureData);
+      const response: any = await fakeApiCall(feature);
       setData(response);
     } catch (error) {
       console.log(error, "error");
@@ -84,10 +92,8 @@ const Feature: React.FC = () => {
   };
   return (
     <div className={styles.container}>
-      <h1>New Arrivals</h1>
-      <span className={styles.description}>
-        A real-time roundup of the latest gadgets on our site.
-      </span>
+      <h1>{title}</h1>
+      <span className={styles.description}>{subTitle}</span>
 
       <div className={styles.product}>
         {!!renderItem.length ? (

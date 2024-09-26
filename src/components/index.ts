@@ -1,7 +1,7 @@
 import Banner from "./Banner/Banner";
 import HorizontalCard from "./Card/horizontal-card/HorizontalCard";
 import VerticalCard from "./Card/vertical-card/VerticalCard";
-import Carosuel from "./Carosuel/Carosuel";
+import Carousel from "./Carousel/Carousel";
 import Categories from "./Categories/Categories";
 import Feature from "./Feature/Feature";
 import Footer from "./Footer/Footer";
@@ -13,7 +13,7 @@ import Section from "./Section/Section";
 
 export {
   Banner,
-  Carosuel,
+  Carousel,
   Categories,
   Feature,
   Footer,

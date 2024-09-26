@@ -1,38 +1,32 @@
-"use-client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Slider, { Settings } from "react-slick";
+"use client";
 
-const Carousel = () => {
-  const settings: Settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+import { settingCarouselHome as setting } from "@/utils";
+import Image from "next/image";
+import React from "react";
+import Slider from "react-slick";
+import styles from "./carousel.module.scss";
+
+type TCarousel = {
+  data: any[];
+};
+const Carousel: React.FC<TCarousel> = ({ data = [] }) => {
+  const renderImage = () => {
+    return data.map((x, index) => (
+      <Image
+        key={index}
+        src={x.url}
+        alt="banner"
+        priority
+        width={500}
+        height={500}
+        className={styles.image_item}
+        unoptimized
+      />
+    ));
   };
-
   return (
-    <div>
-      <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-      </Slider>
+    <div className={styles.slider_container}>
+      <Slider {...setting}>{renderImage()}</Slider>
     </div>
   );
 };

@@ -51,8 +51,9 @@
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                color: $black_12;
-                font-family: inherit;
+                color: $black_17;
+                font-size: 18px;
+                font-weight: 500;
                 flex-direction: row;
 
                 @include md {

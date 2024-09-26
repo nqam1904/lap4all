@@ -29,6 +29,7 @@ const data = [
     content: "For all products on Synced.sg",
   },
 ];
+
 const Section: React.FC = () => {
   const renderOptions = () => {
     return data.map((i, index) => {

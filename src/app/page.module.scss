@@ -9,10 +9,44 @@
     flex-direction: row;
   }
 
-  .bannerContainer {
+  .banner_container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
     margin: 20px 0;
+  }
+
+  .container_animated {
+    width: 100%;
+    margin: 50px 0px;
+
+    .text_animation {
+      height: 100%;
+      white-space: nowrap;
+      animation: scrollText 9s infinite linear;
+      display: inline-block;
+
+      span {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        color: $black_17;
+        font-size: 2rem;
+        font-weight: bold;
+        line-height: 1;
+        padding-inline-start: min(1.5em, 4rem);
+        padding-inline-end: min(1.5em, 4rem);
+      }
+    }
+  }
+
+  @keyframes scrollText {
+    from {
+      transform: translateX(0%);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
   }
 }

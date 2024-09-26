@@ -1,4 +1,5 @@
 import { categoriesData } from "@/constants/dummy";
+import { Settings } from "react-slick";
 
 /**
  * ## Example usage:
@@ -11,6 +12,17 @@ function getMillisecondsDifference(endTime: number) {
   const millisecondsDifference = endTime - startTime;
   return millisecondsDifference;
 }
+
+const settingCarouselHome: Settings = {
+  infinite: true,
+  speed: 500,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  slidesToShow: 1,
+  waitForAnimate: false,
+  fade: true,
+  dots: true,
+};
 
 const getNameCategory = (categoryName: string) => {
   const getTitleCate: string =
@@ -50,4 +62,5 @@ export {
   getEmoji,
   getMillisecondsDifference,
   getNameCategory,
+  settingCarouselHome,
 };

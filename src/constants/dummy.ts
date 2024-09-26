@@ -57,6 +57,25 @@ const bannerData: any[] = [
   },
 ];
 
+const carouselHome: any[] = [
+  {
+    id: Date.now(),
+    url: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: Date.now(),
+    url: "https://plus.unsplash.com/premium_photo-1673548917645-e8d9ed21e2b2?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: Date.now(),
+    url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=3571&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: Date.now(),
+    url: "https://images.unsplash.com/photo-1455894127589-22f75500213a?q=80&w=3165&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+
 const productData: any[] = [
   {
     id: Date.now(),
@@ -171,6 +190,7 @@ const productData: any[] = [
     price: 1200000,
   },
 ];
+
 const productFeatureData: any[] = [
   {
     id: Date.now(),
@@ -211,4 +231,11 @@ const productFeatureData: any[] = [
     price: 1200000,
   },
 ];
-export { bannerData, categoriesData, productData, productFeatureData };
+
+export {
+  bannerData,
+  categoriesData,
+  productData,
+  productFeatureData,
+  carouselHome,
+};
