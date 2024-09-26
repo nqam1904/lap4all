@@ -25,8 +25,9 @@ const Feature: React.FC<TFeature> = ({
     slidesToShow: 4,
     autoplay: true,
     autoplaySpeed: 500,
+    arrows: false,
     slidesToScroll: 1,
-    centerPadding: "60px",
+    centerPadding: "160px",
     swipeToSlide: true,
     responsive: [
       {
@@ -73,7 +74,7 @@ const Feature: React.FC<TFeature> = ({
         key={index}
         loading={loading}
         {...product}
-        hoverable={false}
+        hoverable
         bordered={true}
       />
     ));

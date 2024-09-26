@@ -21,6 +21,7 @@ const VerticalCard: React.FC<IVerticalCard> = ({
       loading={loading}
       bordered={bordered}
       hoverable={hoverable}
+      onClick={() => console.log("helooo")}
       cover={
         !loading ? (
           <div className={styles.wrapper_image}>

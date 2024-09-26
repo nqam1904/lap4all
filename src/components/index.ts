@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import Breadcrumb from "./Breadcrumb/Breadcrumb";
 import HorizontalCard from "./Card/horizontal-card/HorizontalCard";
 import VerticalCard from "./Card/vertical-card/VerticalCard";
 import Carousel from "./Carousel/Carousel";
@@ -13,6 +14,7 @@ import Section from "./Section/Section";
 
 export {
   Banner,
+  Breadcrumb,
   Carousel,
   Categories,
   Feature,

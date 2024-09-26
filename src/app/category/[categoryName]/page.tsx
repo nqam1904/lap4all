@@ -1,6 +1,6 @@
 "use client";
 
-import { HeaderPage, VerticalCard } from "@/components";
+import { Breadcrumb, HeaderPage, VerticalCard } from "@/components";
 import { productData } from "@/constants/dummy";
 import { getEmoji, getNameCategory } from "@/utils";
 import { fakeApiCall } from "@/utils/Utils";
@@ -32,7 +32,12 @@ const CategoryDetails: React.FC<ICategoryDetails> = ({
 
   const renderItem = useMemo(() => {
     return data.map((product, index) => (
-      <VerticalCard key={index} loading={loading} {...product} />
+      <VerticalCard
+        key={index}
+        loading={loading}
+        {...product}
+        hoverable={true}
+      />
     ));
   }, [loading, data]);
 
@@ -57,6 +62,7 @@ const CategoryDetails: React.FC<ICategoryDetails> = ({
         icon={getEmoji(categoryName)}
         name={categoryName}
       />
+      <Breadcrumb />
       {!!renderItem.length ? (
         <div className={styles.products}>{renderItem}</div>
       ) : (

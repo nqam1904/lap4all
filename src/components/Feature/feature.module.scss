@@ -12,9 +12,12 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin-top: 12px;
+        padding: 10px 10px;
+        background-color: $blue_09;
 
         @include md {
             padding: 0;
+            background-color: unset;
         }
     }
 }
