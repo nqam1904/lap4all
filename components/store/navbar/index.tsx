@@ -6,7 +6,6 @@ import styles from "./navbar.module.scss";
 import { useEffect, useState } from "react";
 import AddVisit from "../common/addVisit";
 import NavBarCategory from "./navCategory";
-import NavBarShopping from "./navShopping";
 
 const StoreNavBar = () => {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -62,7 +61,7 @@ const StoreNavBar = () => {
           <div className={styles.rightButtons}>
             {/* <NavBarProfile /> */}
             {/* <NavBarFavorite /> */}
-            <NavBarShopping />
+            {/* <NavBarShopping /> */}
           </div>
         </div>
       </section>
@@ -81,20 +80,15 @@ const StoreNavBar = () => {
               <li>
                 <Link href={"/list/smartphones"}>Mobile</Link>
               </li>
-              <li>
-                <Link href={"/list/tvs"}>TV</Link>
-              </li>
+
               <li>
                 <Link href={"/list/video-games"}>Gaming</Link>
-              </li>
-              <li>
-                <Link href={"/list/photography/cameras"}>Camera</Link>
               </li>
               <li>
                 <Link href={"/list/tablets"}>Tablet</Link>
               </li>
               <li>
-                <Link href={"/list/watches"}>Watch</Link>
+                <Link href={"/list/watches"}>Phụ kiện</Link>
               </li>
             </ul>
           </div>

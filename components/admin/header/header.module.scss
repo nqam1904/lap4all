@@ -1,0 +1,42 @@
+@import "/public/css/variables.module.scss";
+
+.container {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $white !important;
+    border-bottom: 1px solid #f1f1f1;
+    top: 0;
+    z-index: 10;
+
+    .item {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        .title {
+            font-size: 24px;
+        }
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px !important;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .title {
+        display: none;
+    }
+}

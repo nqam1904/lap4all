@@ -38,7 +38,7 @@ const NavBarCategory = ({ isNavbarVisible: isNavbarHide }: IProps) => {
     <div className={styles.category}>
       <button onClick={toggleMenu} className={`${isActive && styles.isActive}`}>
         <ListIcon width={12} />
-        <span>All Categories</span>
+        <span>Tất cả danh mục</span>
       </button>
       <div
         ref={dropdownRef}

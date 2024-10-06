@@ -1,27 +1,37 @@
+import HeaderAdmin from "@/components/admin/header";
+import SideBar from "@/components/admin/side-bar";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { Layout } from "antd";
 import { Metadata } from "next";
-import styles from "./layout.module.scss";
-import AdminSidebar from "@/components/admin/sideBar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
-import { redirect } from "next/navigation";
+import localFont from "next/font/local";
 
+const outfitFont = localFont({
+  src: "../../public/fonts/Outfit-VariableFont.ttf",
+  fallback: ["sans-serif", "system-ui", "arial"],
+});
 export const metadata: Metadata = {
-  title: "Admin",
+  title: "Dashboard",
 };
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/");
-  }
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   redirect("/");
+  // }
   return (
-    <div className={styles.adminLayout}>
-      <AdminSidebar />
-      <div className={styles.rightCol}>
-        <h1>Page Name</h1>
-        {children}
-      </div>
-    </div>
+    <html lang="en">
+      <body className={outfitFont.className}>
+        <AntdRegistry>
+          <HeaderAdmin />
+          <Layout>
+            <SideBar>
+              {children}
+              {/* <Footer /> */}
+            </SideBar>
+          </Layout>
+        </AntdRegistry>
+      </body>
+    </html>
   );
 };
 

@@ -9,7 +9,7 @@ const outfitFont = localFont({
 
 export const metadata: Metadata = {
   title: "Laptop - Lap4ALL",
-  description: "Electronic Shop",
+  description: "Laptop",
 };
 
 export default function RootLayout({
