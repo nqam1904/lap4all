@@ -8,6 +8,7 @@ import ProductForm from "@/components/admin/product/productForm";
 import { TAddProductFormValues, TProductListItem } from "@/types/product";
 import { addProduct, getAllProducts } from "@/actions/product/product";
 import ProductListItem from "@/components/admin/product/productListItem";
+import HeaderPage from "@/components/admin/header-page";
 
 const initialForm: TAddProductFormValues = {
   name: "",
@@ -52,6 +53,7 @@ const AdminProducts = () => {
 
   return (
     <div className={styles.adminProducts}>
+      <HeaderPage />
       <div className={styles.header}>
         <Button
           text="Add new product"

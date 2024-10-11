@@ -1,6 +1,7 @@
 "use client";
 import { CloseIcon } from "@/components/icons/svgIcons";
-import Button from "../button";
+// import Button from "../button";
+import { Button } from "antd";
 import styles from "./popup.module.scss";
 
 interface IProps {
@@ -40,12 +41,10 @@ const Popup = ({
         )}
         {content}
         <div className={styles.windowControl}>
-          <Button text={cancelBtnText || "Cancel"} onClick={onCancel} />
-          <Button
-            text={confirmBtnText || "OK"}
-            disabled={isLoading}
-            onClick={onSubmit}
-          />
+          <Button loading={isLoading} onClick={onSubmit} type="primary">
+            {confirmBtnText || "OK"}
+          </Button>
+          <Button onClick={onCancel}>Hủy bỏ</Button>
         </div>
       </div>
     </div>

@@ -1,17 +1,17 @@
 "use client";
 import styles from "./adminCategories.module.scss";
 
-import CatGroupRow from "@/components/admin/category/rowGroup";
 import {
   TGetAllCategories,
   getAllCategories,
 } from "@/actions/category/category";
 import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
+import CatGroupRow from "@/components/admin/category/rowGroup";
+import HeaderPage from "@/components/admin/header-page";
 import { useEffect, useState } from "react";
 
 const AdminCategories = () => {
   const [allCategories, setAllCategories] = useState<TGetAllCategories[]>([]);
-
   const getData = async () => {
     const data = await getAllCategories();
     if (data.res) setAllCategories(data.res);
@@ -29,10 +29,11 @@ const AdminCategories = () => {
       cat.parentID === null ? groups.push(cat) : categories.push(cat);
     });
   }
+
   return (
     <div className={styles.categoryList}>
+      <HeaderPage />
       <div className={styles.head}>
-        <h3>Add:</h3>
         <AddCategoryGroup onReset={getData} />
       </div>
       <div className={styles.dataTable}>

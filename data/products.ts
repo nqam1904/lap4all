@@ -59,38 +59,6 @@ export const productDetail = {
   name: "MSI Raider GE68 2024 (New Openbox)",
   isAvailable: true,
   desc: "Cấu hình:- i9 14900HX 32G 1Tb RTX 4070 8Gb 16'FHD+ 144hzOpen fullbox -thiếu 10 ngàn là đủ 40 triệu",
-  // images: [
-  //   {
-  //     url: "https://lh3.googleusercontent.com/YrNWaKRHgTLe_Syic-wEsOmo_XB-IAdc1MeZNFTzZXNQHewGQBQI-zNa2378RxHdQuuRgbKcAhunBeZ9KeKLSRL1-csY92Ee",
-  //     priority: 1,
-  //     label: "",
-  //   },
-  //   {
-  //     url: "https://lh3.googleusercontent.com/7Yb6WFl78TjlKVcaLooWswQcb_aaQH7ZFuiuZ5DSshAX94IGyA00ZmcgE2_L6yyvtlDum_-aFRyiwg1GDzrcVV_PpoaXA32z",
-  //     priority: 2,
-  //     label: "",
-  //   },
-  //   {
-  //     url: "https://lh3.googleusercontent.com/F1HC7j37VzyJLtLRrjt4rhDZLkTLXXk3sMV4rmFnNIKpltV8U49K-sNnezMQfGBBgvw3MTP0U84dgVQD54koAArbSAkHZI2q",
-  //     priority: 3,
-  //     label: "",
-  //   },
-  //   {
-  //     url: "https://lh3.googleusercontent.com/-_4aq1l8VDJet2Dr_8MawuSRQ90j7T6kV7B6PQZSQA-xEMHMDDEQMwc0VubkSlpgzMCPJLJ1HYV4TCbPLAFYMUi68bLkVK4M",
-  //     priority: 4,
-  //     label: "",
-  //   },
-  //   {
-  //     url: "https://lh3.googleusercontent.com/KH2u5EX5q68QMD2_nRcYpn0MEWP_WfGd2IYT2Ib__iUnm7yNJbxsNT-phE0Pqy2j-lS5G2dJRdyECDVteGv5DbR16r9Q379JrA",
-  //     priority: 5,
-  //     label: "",
-  //   },
-  //   {
-  //     url: "https://lh3.googleusercontent.com/VjkLVL-WOhYMJtSXADStFXVlE7oSEhiZJ-VjQ8NrG140r0Wsq6g4eef0sNSt3biuVO6aVqJ9SVke-vy5b7LBfAMaUpQIfyyq",
-  //     priority: 6,
-  //     label: "",
-  //   },
-  // ],
   images: [
     {
       url: "/images/products/monitor1.jpg",

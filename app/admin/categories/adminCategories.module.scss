@@ -3,17 +3,23 @@
 .categoryList {
   display: flex;
   flex-direction: column;
+  > h1{
+    font-size: 28px;
+    font-weight: bold;
+    color: $black_17;
+  }
   > .head {
     width: 100%;
     margin-top: 12px;
     display: flex;
-    gap: 16px;
-    align-items: center;
-    > h3 {
-      font-size: 2rem;
-      font-weight: 300;
-      color: nth($color-light, 8);
-    }
+    justify-content: flex-end;
+    // gap: 16px;
+    // align-items: center;
+    // > h3 {
+    //   font-size: 2rem;
+    //   font-weight: 300;
+    //   color: nth($color-light, 8);
+    // }
     > button {
       width: 200px;
     }

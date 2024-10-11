@@ -84,7 +84,6 @@ const convertToJson = (categoriesTable: TCategory[]): TGroupJSON[] => {
 export const getAllCategories = async () => {
   try {
     const result: TGetAllCategories[] = await db.category.findMany();
-
     if (!result) return { error: "Can't read categories" };
     return { res: result };
   } catch (error) {
@@ -104,6 +103,7 @@ export const getAllCategoriesJSON = async () => {
 };
 
 export const addCategory = async (data: TAddCategory) => {
+  console.log(data, "dada");
   if (!AddCategory.safeParse(data).success) return { error: "Invalid Data!" };
 
   try {
@@ -116,6 +116,7 @@ export const addCategory = async (data: TAddCategory) => {
         iconUrl: data.iconUrl,
       },
     });
+    console.log(result);
     if (!result) return { error: "cant add to database" };
     return { res: result };
   } catch (error) {

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { dashboardSideMenu } from "@/data/dummyData";
 import {
   AppstoreTwoTone,
   DatabaseTwoTone,
@@ -16,26 +18,15 @@ function SideMenu() {
   const pathname = usePathname();
   const [selectedKey, setSelectedKey] = useState([""]);
 
+  const selectSideMenu = () => {
+    const getItemMenu = dashboardSideMenu.find((x) => x?.link === pathname);
+    if (pathname.startsWith(`${getItemMenu?.link || ""}`)) {
+      setSelectedKey([`${getItemMenu.key}`]);
+    }
+  };
+
   useEffect(() => {
-    // if (pathname.startsWith("/bookmarks")) {
-    //   setSelectedKey(["2"]);
-    // } else if (pathname.startsWith("/courses")) {
-    //   setSelectedKey(["3"]);
-    // } else if (pathname.startsWith("/tutorials")) {
-    //   setSelectedKey(["4"]);
-    // } else if (pathname.startsWith("/best-practices")) {
-    //   setSelectedKey(["5"]);
-    // } else if (pathname.startsWith("/certifications")) {
-    //   setSelectedKey(["6"]);
-    // } else if (pathname.startsWith("/resources")) {
-    //   setSelectedKey(["7"]);
-    // } else if (pathname.startsWith("/events")) {
-    //   setSelectedKey(["8"]);
-    // } else if (pathname.startsWith("/community")) {
-    //   setSelectedKey(["9"]);
-    // } else if (pathname === "/") {
-    //   setSelectedKey(["1"]);
-    // }
+    selectSideMenu();
   }, [pathname]);
 
   const menuItems: ItemType<MenuItemType>[] = [

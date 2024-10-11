@@ -1,0 +1,14 @@
+@import "/public/css/variables.module.scss";
+
+.container {
+    >h4 {
+        font-family: inherit !important;
+        color: $black_17;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.2;
+        text-transform: capitalize;
+        margin: 12px 0;
+        padding-bottom: 12px;
+    }
+}

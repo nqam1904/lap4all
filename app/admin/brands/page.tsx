@@ -11,6 +11,7 @@ import {
 } from "@/actions/brands/brands";
 import { TBrand } from "@/types/product";
 import Popup from "@/components/UI/popup";
+import HeaderPage from "@/components/admin/header-page";
 
 let selectedBrandID = "";
 const Brand = () => {
@@ -99,6 +100,7 @@ const Brand = () => {
 
   return (
     <div className={styles.brands}>
+      <HeaderPage />
       <div className={styles.addingSection}>
         <input
           type="text"

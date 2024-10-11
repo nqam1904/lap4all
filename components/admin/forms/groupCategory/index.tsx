@@ -10,17 +10,17 @@ interface IProps {
 }
 
 const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
-  const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
+  // const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
   return (
     <div className={styles.groupCategoryForm}>
       <div className={styles.row}>
-        <span className={styles.col1}>Category Group Name:</span>
+        <span className={styles.col1}>TÊN NHÓM DANH MỤC:</span>
         <input
           name="name"
           value={data.name}
           onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
           type="text"
-          placeholder="name..."
+          placeholder="TÊN..."
         />
       </div>
       <div className={styles.row}>
@@ -45,7 +45,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
           value={data.iconUrl || ""}
         />
       </div>
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <span className={styles.col1}>ICON Size:</span>
         {data.iconSize && (
           <>
@@ -75,7 +75,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
             />
           </>
         )}
-      </div>
+      </div> */}
       {errorMsg !== "" && (
         <div className={styles.row}>
           <span className={styles.error}>{errorMsg}</span>

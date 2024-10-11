@@ -1,16 +1,18 @@
 "use client";
-import { ElementRef, useRef, useState } from "react";
-import styles from "./addCategory.module.scss";
-import Button from "@/components/UI/button";
 import { TGetAllCategories, addCategory } from "@/actions/category/category";
+import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
+import { message } from "antd";
+import { useState } from "react";
 import GroupCategory from "../../forms/groupCategory";
+import styles from "./addCategory.module.scss";
 
 interface IProps {
   onReset: () => void;
 }
 
 const AddCategoryGroup = ({ onReset }: IProps) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [showWindow, setShowWindow] = useState<boolean>(false);
   const defaultGroupData: TGetAllCategories = {
     id: "",
@@ -25,46 +27,65 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   const [groupCategoryData, setGroupCategory] =
     useState<TGetAllCategories>(defaultGroupData);
 
+  const resetForm = () => {
+    setGroupCategory(defaultGroupData);
+    setErrorMsg("");
+    setShowWindow(false);
+  };
+
   const handleAddGroup = async () => {
-    const { name, url, iconUrl, iconSize } = groupCategoryData;
-    if (!name || !url || !iconUrl || !iconSize) return;
+    const { name, url, iconUrl } = groupCategoryData;
     if (name === "") {
-      setErrorMsg("Name is empty!");
+      setErrorMsg("Vui lòng nhập tên nhóm!");
       return;
     }
-    if (iconSize[0] === 0 || iconSize[1] === 0) {
-      setErrorMsg("Icon Size is empty!");
+
+    if (url === "") {
+      setErrorMsg("Vui lòng nhập link ( ví dụ: 'pc-laptops')!");
       return;
     }
+
     if (iconUrl === "") {
       setErrorMsg("Icon Url is empty!");
       return;
     }
-    if (url === "") {
-      setErrorMsg("URL is empty!");
-      return;
-    }
 
     setButtonDisabled(true);
-    const result = await addCategory(groupCategoryData);
-
-    if (result.res) {
-      setGroupCategory(defaultGroupData);
+    try {
+      const result = await addCategory(groupCategoryData);
+      console.log(result);
+      if (result.error) {
+        messageApi.open({
+          type: "error",
+          content: result.error,
+        });
+      } else {
+        setErrorMsg("");
+        resetForm();
+        onReset();
+      }
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content: `${error}`,
+      });
+    } finally {
       setButtonDisabled(false);
-      setErrorMsg("");
-      setShowWindow(false);
-      onReset();
-    } else {
-      setButtonDisabled(false);
-      setErrorMsg("Can't Insert it to Database!");
     }
   };
 
   return (
     <div className={styles.addCategoryGroup}>
-      <Button onClick={() => setShowWindow(true)} text="Add Group" />
+      {contextHolder}
+      <Button onClick={() => setShowWindow(true)} text="Tạo nhóm danh mục" />
       {showWindow && (
         <Popup
+          title="Tạo nhóm danh mục"
+          isLoading={buttonDisabled}
+          onSubmit={() => handleAddGroup()}
+          onCancel={resetForm}
+          onClose={resetForm}
+          confirmBtnText="Xác nhận"
           content={
             <GroupCategory
               errorMsg={errorMsg}
@@ -72,11 +93,6 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
               onChange={setGroupCategory}
             />
           }
-          isLoading={buttonDisabled}
-          onCancel={() => setShowWindow(false)}
-          onClose={() => setShowWindow(false)}
-          onSubmit={() => handleAddGroup()}
-          title="Add Category Group"
         />
       )}
     </div>
