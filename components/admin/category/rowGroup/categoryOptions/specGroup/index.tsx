@@ -81,8 +81,8 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
           <span>{title}</span>
           <Button
             disabled={isLoading}
-            text="delete"
-            onClick={() => handleDeleteSpecGroup()}
+            text="Xóa"
+            onClick={handleDeleteSpecGroup}
           />
         </div>
         <div>
@@ -94,8 +94,8 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
           />
           <Button
             disabled={isLoading}
-            text="Add Spec"
-            onClick={() => handleAddSingleSpec()}
+            text="Thêm cấu hình"
+            onClick={handleAddSingleSpec}
           />
         </div>
       </div>
@@ -114,7 +114,7 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
         </>
       ) : (
         <div className={styles.specRow}>
-          <span>There is no specification!</span>
+          <span>Hiện tại không có cấu hình</span>
         </div>
       )}
     </div>

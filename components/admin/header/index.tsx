@@ -1,12 +1,8 @@
 "use client";
-import {
-  DownOutlined,
-  LaptopOutlined,
-  LogoutOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, MenuProps, message, Space } from "antd";
 import { Header } from "antd/es/layout/layout";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./header.module.scss";
 
@@ -46,7 +42,14 @@ const HeaderAdmin = () => {
     <Header className={styles.container}>
       {contextHolder}
       <div className={styles.item}>
-        <LaptopOutlined className={styles.logo} />
+        <Image
+          alt="Logo"
+          src={"/images/logo.png"}
+          width={125}
+          height={40}
+          quality={100}
+          priority
+        />
         <span className={styles.title}>Dashboard</span>
       </div>
       <Dropdown menu={{ items, onClick }}>

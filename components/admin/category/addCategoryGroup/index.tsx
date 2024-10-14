@@ -1,8 +1,7 @@
 "use client";
 import { TGetAllCategories, addCategory } from "@/actions/category/category";
-import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { useState } from "react";
 import GroupCategory from "../../forms/groupCategory";
 import styles from "./addCategory.module.scss";
@@ -26,6 +25,8 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [groupCategoryData, setGroupCategory] =
     useState<TGetAllCategories>(defaultGroupData);
+
+  const handleAddCategories = () => setShowWindow(true);
 
   const resetForm = () => {
     setGroupCategory(defaultGroupData);
@@ -77,7 +78,9 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   return (
     <div className={styles.addCategoryGroup}>
       {contextHolder}
-      <Button onClick={() => setShowWindow(true)} text="Tạo nhóm danh mục" />
+      <Button onClick={handleAddCategories} type="primary">
+        Tạo nhóm danh mục
+      </Button>
       {showWindow && (
         <Popup
           title="Tạo nhóm danh mục"

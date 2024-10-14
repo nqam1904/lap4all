@@ -2,10 +2,10 @@
 import styles from "./addSpecGroup.module.scss";
 
 import { useState } from "react";
-
-import Button from "@/components/UI/button";
+ 
 import { addOptionSet, addSpecGroup } from "@/actions/category/categoryOptions";
 import { TSpecGroup } from "@/types/common";
+import { Button } from "antd";
 
 interface IProps {
   categorySpecGroupID: string;
@@ -41,7 +41,7 @@ const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
   return (
     <div className={styles.addSpecGroup}>
       <div>
-        <span>Title:</span>
+        <span>Nhóm:</span>
         <input
           type="text"
           onChange={(e) => setTitle(e.currentTarget.value)}
@@ -49,11 +49,9 @@ const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
           disabled={isLoading}
         />
       </div>
-      <Button
-        text="Add Spec Group"
-        disabled={isLoading}
-        onClick={() => handleAddOption()}
-      />
+      <Button disabled={isLoading} onClick={() => handleAddOption()}>
+        Thêm nhóm cấu hình
+      </Button>
     </div>
   );
 };

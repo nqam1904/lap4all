@@ -1,5 +1,4 @@
 "use server";
-import { categoriesData } from "@/data/categoriesData";
 import { db } from "@/lib/db";
 import { TCategory, TGroupJSON } from "@/types/categories";
 import { z } from "zod";
@@ -25,7 +24,6 @@ const UpdateCategory = z.object({
   id: z.string(),
   name: z.string().min(3).optional(),
   url: z.string().min(3).optional(),
-  iconSize: z.array(z.number().int()),
   iconUrl: z.string().min(3).optional(),
 });
 
@@ -92,18 +90,17 @@ export const getAllCategories = async () => {
 };
 export const getAllCategoriesJSON = async () => {
   try {
-    // const result: TCategory[] = await db.category.findMany();
+    const result: TCategory[] = await db.category.findMany();
 
-    // if (!result) return { error: "Can't read categories" };
-    // return { res: convertToJson(result) };
-    return { res: categoriesData };
+    if (!result) return { error: "Can't read categories" };
+    return { res: convertToJson(result) };
+    // return { res: categoriesData };
   } catch (error) {
     return { error: "Cant read Category Groups" };
   }
 };
 
 export const addCategory = async (data: TAddCategory) => {
-  console.log(data, "dada");
   if (!AddCategory.safeParse(data).success) return { error: "Invalid Data!" };
 
   try {
@@ -116,7 +113,6 @@ export const addCategory = async (data: TAddCategory) => {
         iconUrl: data.iconUrl,
       },
     });
-    console.log(result);
     if (!result) return { error: "cant add to database" };
     return { res: result };
   } catch (error) {
@@ -128,7 +124,7 @@ export const updateCategory = async (data: TUpdateCategory) => {
   if (!UpdateCategory.safeParse(data).success)
     return { error: "Data is no valid" };
 
-  const { id, iconSize, ...values } = data;
+  const { id, ...values } = data;
 
   try {
     let result = await db.category.update({
@@ -136,7 +132,6 @@ export const updateCategory = async (data: TUpdateCategory) => {
         id,
       },
       data: {
-        iconSize: [...iconSize],
         ...values,
       },
     });

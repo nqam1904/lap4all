@@ -12,13 +12,13 @@ const AddCategory = ({ data, errorMsg, onChange }: IProps) => {
   return (
     <div className={styles.addCategory}>
       <div className={styles.row}>
-        <span className={styles.col1}>Category Name:</span>
+        <span className={styles.col1}>Tên:</span>
         <input
           name="name"
           value={data.name}
           onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
           type="text"
-          placeholder="name..."
+          placeholder="Nhập tên..."
         />
       </div>
       <div className={styles.row}>

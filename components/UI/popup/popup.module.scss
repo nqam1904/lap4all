@@ -5,6 +5,7 @@
     margin-top: 24px;
     transform: scale(1.03);
   }
+
   100% {
     margin-top: 0px;
     transform: scale(1);
@@ -21,8 +22,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 
-  > .background {
+  >.background {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -32,7 +34,8 @@
     background-color: rgba(black, 0.1);
     backdrop-filter: blur(2px);
   }
-  > .window {
+
+  >.window {
     width: 700px;
     max-height: 95vh;
     display: flex;
@@ -55,16 +58,18 @@
       padding: 6px 10px;
       border-radius: 6px;
       width: 100%;
+
       &:hover {
         border-color: nth($color-light, 5);
       }
+
       &:focus {
         padding: 5px 9px;
         border: 2px solid nth($color-light, 8);
       }
     }
 
-    > .header {
+    >.header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -72,55 +77,63 @@
       color: nth($color-light, 8);
       font-size: 1.6rem;
       border-bottom: 1px solid nth($color-light, 3);
-      > button {
+
+      >button {
         width: 32px;
         height: 32px;
         border-radius: 6px;
         border: 1px solid white;
         transition: background-color 0.4s;
-        > svg {
+
+        >svg {
           fill: nth($color-light, 6);
         }
+
         &:hover {
           background-color: nth($color-light, 1);
-          > svg {
+
+          >svg {
             fill: nth($color-light, 8);
           }
         }
+
         &:active {
           background-color: nth($color-light, 2);
         }
       }
     }
 
-    > .addGroup {
+    >.addGroup {
       display: flex;
       flex-direction: column;
       padding-top: 20px;
       gap: 16px;
 
-      > .row {
+      >.row {
         display: flex;
         align-items: center;
         gap: 16px;
 
-        > .col1 {
+        >.col1 {
           width: 200px;
         }
-        > .error {
+
+        >.error {
           width: 100%;
           color: nth($color-red, 5);
         }
       }
     }
-    > .windowControl {
+
+    >.windowControl {
       display: flex;
       padding-top: 16px;
       border-top: 1px solid nth($color-light, 3);
       justify-content: center;
       align-items: center;
       gap: 24px;
-      > button {
+
+      >button {
         width: 140px;
       }
     }

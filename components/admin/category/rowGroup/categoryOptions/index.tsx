@@ -3,16 +3,12 @@ import styles from "./categoryOptions.module.scss";
 
 import { useEffect, useState } from "react";
 
-import AddOption from "./AddOption";
-
 // -------- ACTIONS --------
 import {
   getOptionSetByCatID,
   getSpecGroupByCatID,
 } from "@/actions/category/categoryOptions";
 import { TOptionSet, TSpecGroup } from "@/types/common";
-import OptionSet from "./optionSet";
-import Button from "@/components/UI/button";
 import AddSpecGroup from "./addSpecGroup";
 import SpecGroup from "./specGroup";
 
@@ -72,7 +68,7 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
       <div className={styles.header}>
         <h2>{categoryName}</h2>
         <div>
-          <h3
+          {/* <h3
             className={isOption ? styles.active : ""}
             onClick={() => setIsOption(true)}
           >
@@ -82,12 +78,13 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
             className={!isOption ? styles.active : ""}
             onClick={() => setIsOption(false)}
           >
-            Specifications
-          </h3>
+            Cấu hình
+          </h3> */}
+          {/* Specifications */}
+          <h3 className={styles.active}>Cấu hình</h3>
         </div>
       </div>
-
-      {isOption ? (
+      {/* {isOption ? (
         // ------------------ OPTIONS SECTION ------------------
         <div className={styles.tabContainer}>
           <AddOption
@@ -137,7 +134,32 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
             )}
           </div>
         </div>
-      )}
+      )} */}
+
+      {/*  ------------------ SPECIFICATION SECTION ------------------  */}
+      <div className={styles.tabContainer}>
+        <AddSpecGroup
+          categorySpecGroupID={categoryID}
+          reloadRequest={handleReloadSpecs}
+        />
+        <div className={styles.specGroupList}>
+          {specGroupList.length > 0 ? (
+            <>
+              {specGroupList.map((specGroup) => (
+                <SpecGroup
+                  key={specGroup.id}
+                  data={specGroup}
+                  reloadRequest={handleReloadSpecs}
+                />
+              ))}
+            </>
+          ) : (
+            <div className={styles.addCategoryOption}>
+              <span>Hiện tại không có cấu hình nào!</span>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

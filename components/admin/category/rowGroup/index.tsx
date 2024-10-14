@@ -1,23 +1,23 @@
 "use client";
 import styles from "./rowGroup.module.scss";
 
-import { useState } from "react";
-import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
+import { useState } from "react";
 
 import {
   addCategory,
-  updateCategory,
   deleteCategory,
-  TGetAllCategories,
   TAddCategory,
+  TGetAllCategories,
   TUpdateCategory,
+  updateCategory,
 } from "@/actions/category/category";
 
 import GroupCategory from "@/components/admin/forms/groupCategory";
-import CategoryOptions from "./categoryOptions";
+import { Button } from "antd";
 import AddCategory from "./addCategory";
 import Category from "./category";
+import CategoryOptions from "./categoryOptions";
 
 interface IProps {
   data: TGetAllCategories;
@@ -48,7 +48,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
 
   // ---------------------- FUNCTIONS ----------------------
   const handleUpdateGroup = async () => {
-    let updatedData: TUpdateCategory = { id: groupId, iconSize: [10, 10] };
+    let updatedData: TUpdateCategory = { id: groupId };
 
     const keys = ["name", "url", "iconUrl"] as const;
 
@@ -67,10 +67,6 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
       updatedData.iconUrl = groupCategoryData.iconUrl;
     }
 
-    if (groupCategoryData.iconSize && data.iconSize) {
-      if (groupCategoryData.iconSize.toString() !== data.iconSize.toString())
-        updatedData.iconSize = [...groupCategoryData.iconSize];
-    }
     setIsLoading(true);
     const response = await updateCategory(updatedData);
     if (!response.error) {
@@ -140,15 +136,24 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
     <div className={styles.catGroupRow}>
       <span>{name}</span>
       <div>
-        <Button
-          text="Options / Specifications"
-          onClick={() => setShowOptions(true)}
-        />
-        <Button text="Add Category" onClick={() => setShowAddCategory(true)} />
+        <Button onClick={() => setShowOptions(true)}>Cấu hình chi tiết</Button>
+        <Button onClick={() => setShowAddCategory(true)}>Thêm danh mục</Button>
       </div>
       <div>
-        <Button text="Edit" onClick={() => setShowEdit(true)} />
-        <Button text="Delete" onClick={() => setShowDelete(true)} />
+        <Button
+          onClick={() => setShowEdit(true)}
+          variant="outlined"
+          color="primary"
+        >
+          Update
+        </Button>
+        <Button
+          color="danger"
+          variant="solid"
+          onClick={() => setShowDelete(true)}
+        >
+          Delete
+        </Button>
       </div>
       {categories.length > 0 && (
         <div className={styles.categories}>
@@ -159,11 +164,11 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
                   data={cat}
                   key={cat.id}
                   subCategories={categories.filter(
-                    (c) => c.parentID === cat.id
+                    (c) => c.parentID === cat.id,
                   )}
                   onReset={onReset}
                 />
-              )
+              ),
           )}
         </div>
       )}
@@ -193,7 +198,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
           onCancel={() => setShowAddCategory(false)}
           onClose={() => setShowAddCategory(false)}
           onSubmit={() => handleAddCategory()}
-          title="Add Category"
+          title="Thêm danh mục"
         />
       )}
       {showEdit && (
@@ -209,14 +214,14 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
           onCancel={() => setShowEdit(false)}
           onClose={() => setShowEdit(false)}
           onSubmit={() => handleUpdateGroup()}
-          title={`Updating Group: ${data.name}`}
+          title={`Cập nhật nhóm: ${data.name}`}
         />
       )}
       {showDelete && (
         <Popup
           content={
             <div className={styles.deleteText}>
-              <span>Are you sure?</span>
+              <span>Bạn có chắc muốn xóa?</span>
               <span>{errorMsg}</span>
             </div>
           }
@@ -224,7 +229,8 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
           width="400px"
           onCancel={() => setShowDelete(false)}
           onClose={() => setShowDelete(false)}
-          onSubmit={() => handleDelete()}
+          onSubmit={handleDelete}
+          isDelete
         />
       )}
     </div>

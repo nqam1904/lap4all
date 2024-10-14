@@ -1,16 +1,22 @@
 "use client";
 import styles from "./list.module.scss";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import ProductCard from "@/components/store/common/productCard";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
 
+import { getList } from "@/actions/list/listServices";
+import Filters from "@/components/store/listPage/filters";
+import NoItem from "@/components/store/listPage/noItem";
+import Button from "@/components/UI/button";
+import { SK_Box } from "@/components/UI/skeleton";
 import { sortDropdownData } from "@/data/uiElementsData";
+import { TListSort, TPageStatus } from "@/types/list";
 import {
   TBrand,
   TFilterBrands,
@@ -18,12 +24,6 @@ import {
   TListItem,
   TProductPath,
 } from "@/types/product";
-import Button from "@/components/UI/button";
-import { getList } from "@/actions/list/listServices";
-import { TListSort, TPageStatus } from "@/types/list";
-import { SK_Box } from "@/components/UI/skeleton";
-import NoItem from "@/components/store/listPage/noItem";
-import Filters from "@/components/store/listPage/filters";
 
 const defaultFilters: TFilters = {
   stockStatus: "all",
@@ -49,7 +49,6 @@ const ListPage = () => {
 
   const [productList, setProductList] = useState<TListItem[]>([]);
   const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
-
   const [sortIndex, setSortIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
@@ -68,23 +67,24 @@ const ListPage = () => {
       const response = await getList(
         pathName,
         sortData[sortIndex],
-        appliedFilters
+        appliedFilters,
       );
+      console.log(response, "response");
       if (response.error || !response.products || !response.subCategories)
-        // return router.push("/");
+        if (isFilterApplied) {
+          // return router.push("/");
 
-      if (isFilterApplied) {
-        setFilters(appliedFilters);
-        setProductList(response.products);
-        setIsListLoading(false);
-      } else {
-        const filtersFromDB = getFiltersFromProductList(response.products);
-        setFilters(filtersFromDB);
-        setSubCategories(response.subCategories);
-        setProductList(response.products);
+          setFilters(appliedFilters);
+          setProductList(response.products);
+          setIsListLoading(false);
+        } else {
+          const filtersFromDB = getFiltersFromProductList(response.products);
+          setFilters(filtersFromDB);
+          setSubCategories(response.subCategories);
+          setProductList(response.products);
 
-        setIsListLoading(false);
-      }
+          setIsListLoading(false);
+        }
     };
 
     getProductsList();
@@ -157,7 +157,7 @@ const ListPage = () => {
   const handleResetFilters = () => {
     const newBrands: TFilterBrands[] = [];
     filters.brands.forEach((b) =>
-      newBrands.push({ id: b.id, name: b.name, isSelected: true })
+      newBrands.push({ id: b.id, name: b.name, isSelected: true }),
     );
     const newFilter: TFilters = {
       brands: newBrands,
@@ -310,7 +310,7 @@ const SKL_Product = (): React.ReactNode[] => {
           <SK_Box width="40%" height="12px" />
         </div>
         <SK_Box width="60%" height="20px" />
-      </div>
+      </div>,
     );
   }
   return nodes;

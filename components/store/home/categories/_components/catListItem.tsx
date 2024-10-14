@@ -14,8 +14,10 @@ const CategoryListItem = ({ categoryData }: { categoryData: TGroupJSON }) => {
           <Image
             src={"images/icons/" + group.iconUrl + ".svg"}
             alt={group.name}
-            width={group.iconSize[0]}
-            height={group.iconSize[1]}
+            // width={group.iconSize[0]}
+            // height={group.iconSize[1]}
+            width={17}
+            height={15}
           />
         </div>
         {group.name}

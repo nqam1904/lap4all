@@ -3,16 +3,16 @@ import styles from "./categoryRow.module.scss";
 
 import { useState } from "react";
 
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
 import {
   addCategory,
   deleteCategory,
-  updateCategory,
   TAddCategory,
   TGetAllCategories,
   TUpdateCategory,
+  updateCategory,
 } from "@/actions/category/category";
+import Popup from "@/components/UI/popup";
+import { Button } from "antd";
 import AddCategory from "../addCategory";
 import CategoryOptions from "../categoryOptions";
 
@@ -76,7 +76,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       return;
     }
 
-    let updatedData: TUpdateCategory = { id: categoryID, iconSize: [] };
+    let updatedData: TUpdateCategory = { id: categoryID };
 
     if (editCategoryData.name !== categoryName)
       updatedData.name = editCategoryData.name;
@@ -172,7 +172,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
 
     let updatedData: TUpdateCategory = {
       id: selectedSubCategory.id,
-      iconSize: [],
+      // iconSize: [],
     };
     if (editSubCatData.name !== selectedSubCategory.name)
       updatedData.name = editSubCatData.name;
@@ -230,16 +230,27 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
     <div className={styles.categoryRow}>
       <div className={styles.parentRow}>
         <span>{categoryName}</span>
+        {/* <div>
+          <Button onClick={() => setShowOptions(true)}>Options</Button>
+          <Button onClick={() => setShowAddSubCategory(true)}>
+            + Thêm Category con
+          </Button>
+        </div> */}
         <div>
-          <Button text="Options" onClick={() => setShowOptions(true)} />
           <Button
-            text="+ Add Sub Category"
-            onClick={() => setShowAddSubCategory(true)}
-          />
-        </div>
-        <div>
-          <Button text="Edit" onClick={() => setShowEdit(true)} />
-          <Button text="Delete" onClick={() => setShowDelete(true)} />
+            onClick={() => setShowEdit(true)}
+            variant="outlined"
+            color="primary"
+          >
+            Update
+          </Button>
+          <Button
+            color="danger"
+            variant="solid"
+            onClick={() => setShowDelete(true)}
+          >
+            Delete
+          </Button>
         </div>
       </div>
       {subCategories !== undefined && subCategories?.length > 0 && (
@@ -249,7 +260,6 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
               <span>{subCat.name}</span>
               <div>
                 <Button
-                  text="Options"
                   onClick={() =>
                     handleShowSubCatOptions({
                       id: subCat.id,
@@ -257,11 +267,12 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
                       url: "",
                     })
                   }
-                />
+                >
+                  Options
+                </Button>
               </div>
               <div>
                 <Button
-                  text="Edit"
                   onClick={() =>
                     handleShowEditSub({
                       id: subCat.id,
@@ -269,11 +280,16 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
                       url: subCat.url,
                     })
                   }
-                />
+                >
+                  Update
+                </Button>
                 <Button
-                  text="Delete"
+                  color="danger"
+                  variant="solid"
                   onClick={() => handleShowDeleteSub(subCat.id)}
-                />
+                >
+                  Xóa
+                </Button>
               </div>
             </div>
           ))}
@@ -293,8 +309,8 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
           onCancel={() => setShowEdit(false)}
           onClose={() => setShowEdit(false)}
           onSubmit={() => handleUpdate()}
-          confirmBtnText="Save"
-          title="Update Category"
+          confirmBtnText="Lưu"
+          title="Cập nhật danh mục"
         />
       )}
 

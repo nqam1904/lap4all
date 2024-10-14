@@ -1,12 +1,12 @@
 "use client";
 import styles from "./navCategory.module.scss";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useToggleMenu } from "@/hooks/useToggleMenu";
-import { ListIcon } from "@/components/icons/svgIcons";
 import { getAllCategoriesJSON } from "@/actions/category/category";
+import { ListIcon } from "@/components/icons/svgIcons";
+import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { TGroupJSON } from "@/types/categories";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 interface IProps {
   isNavbarVisible: boolean;

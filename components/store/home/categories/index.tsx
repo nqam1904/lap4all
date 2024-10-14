@@ -1,12 +1,11 @@
 "use client";
-import styles from "./homeCategoryList.module.scss";
 
-import { useEffect, useState } from "react";
-
-import CategoryListItem from "./_components/catListItem";
-import { TGroupJSON } from "@/types/categories";
 import { getAllCategoriesJSON } from "@/actions/category/category";
 import { SK_Box } from "@/components/UI/skeleton";
+import { TGroupJSON } from "@/types/categories";
+import { useEffect, useState } from "react";
+import CategoryListItem from "./_components/catListItem";
+import styles from "./homeCategoryList.module.scss";
 
 const HomeCategoryList = () => {
   const [categories, setCategories] = useState<TGroupJSON[]>([]);

@@ -14,6 +14,7 @@ interface IProps {
   onSubmit: () => void;
   isLoading: boolean;
   content: React.ReactNode;
+  isDelete?: boolean;
 }
 
 const Popup = ({
@@ -26,6 +27,7 @@ const Popup = ({
   onSubmit,
   isLoading,
   content,
+  isDelete = false,
 }: IProps) => {
   return (
     <div className={styles.popup}>
@@ -41,7 +43,12 @@ const Popup = ({
         )}
         {content}
         <div className={styles.windowControl}>
-          <Button loading={isLoading} onClick={onSubmit} type="primary">
+          <Button
+            loading={isLoading}
+            onClick={onSubmit}
+            color={isDelete ? "danger" : "primary"}
+            variant="solid"
+          >
             {confirmBtnText || "OK"}
           </Button>
           <Button onClick={onCancel}>Hủy bỏ</Button>
