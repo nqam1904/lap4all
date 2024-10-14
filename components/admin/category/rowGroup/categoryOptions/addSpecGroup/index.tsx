@@ -2,10 +2,10 @@
 import styles from "./addSpecGroup.module.scss";
 
 import { useState } from "react";
- 
-import { addOptionSet, addSpecGroup } from "@/actions/category/categoryOptions";
+
+import { addSpecGroup } from "@/actions/category/categoryOptions";
 import { TSpecGroup } from "@/types/common";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
 interface IProps {
   categorySpecGroupID: string;
@@ -15,31 +15,40 @@ interface IProps {
 const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
-
+  const [messageApi, contextHolder] = message.useMessage();
+  
   const handleAddOption = async () => {
-    if (!title || title === "") return;
+    try {
+      setIsLoading(true);
+      if (!title || title === "") return messageApi.open({
+        type: "error",
+        content: "Vui lòng nhập tên nhóm cấu hình",
+      });;
+      const data: TSpecGroup = {
+        id: categorySpecGroupID,
+        specs: [],
+        title,
+      };
 
-    const data: TSpecGroup = {
-      id: categorySpecGroupID,
-      specs: [],
-      title,
-    };
-
-    setIsLoading(true);
-    const result = await addSpecGroup(data);
-    if (result.error) {
+      const result = await addSpecGroup(data);
+      if (result.error) {
+        setIsLoading(false);
+        return;
+      }
+      if (result.res) {
+        setTitle("");
+        reloadRequest();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
       setIsLoading(false);
-      return;
-    }
-    if (result.res) {
-      setTitle("");
-      setIsLoading(false);
-      reloadRequest();
     }
   };
 
   return (
     <div className={styles.addSpecGroup}>
+      {contextHolder}
       <div>
         <span>Nhóm:</span>
         <input

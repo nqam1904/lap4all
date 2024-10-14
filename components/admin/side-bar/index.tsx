@@ -21,9 +21,7 @@ function SideBar({ children }: { children: React.ReactNode }) {
         <SideMenu />
       </Sider>
       <Layout style={{ marginLeft: "200px" }}>
-        <Content style={{ padding: "16px", minHeight: "calc(100vh - 64px)" }}>
-          {children}
-        </Content>
+        <Content style={{ padding: "16px" }}>{children}</Content>
       </Layout>
     </Layout>
   );

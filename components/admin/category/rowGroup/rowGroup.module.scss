@@ -4,24 +4,23 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 12px;
-  padding-left: 20px;
   align-items: center;
   background-color: $white;
   border-radius: 12px;
-  
-  > span {
+
+  >span {
     display: inline-block;
     width: 200px;
     color: nth($color-light, 8);
     font-size: 1.4rem;
   }
 
-  > div {
-    > button {
+  >div {
+    >button {
       margin-left: 8px;
     }
   }
+
   .deleteText {
     width: 100%;
     padding: 20px 20px 40px;
@@ -32,6 +31,7 @@
     justify-content: center;
     text-align: center;
   }
+
   .categories {
     min-width: 100%;
     display: flex;

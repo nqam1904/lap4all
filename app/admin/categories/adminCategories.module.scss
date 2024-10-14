@@ -3,16 +3,19 @@
 .categoryList {
   display: flex;
   flex-direction: column;
-  > h1{
+  height: 100vh;
+  >h1 {
     font-size: 28px;
     font-weight: bold;
     color: $black_17;
   }
-  > .head {
+
+  >.head {
     width: 100%;
-    margin-top: 12px;
+    // margin-top: 12px;
     display: flex;
     justify-content: flex-end;
+
     // gap: 16px;
     // align-items: center;
     // > h3 {
@@ -20,12 +23,17 @@
     //   font-weight: 300;
     //   color: nth($color-light, 8);
     // }
-    > button {
+    >button {
       width: 200px;
     }
   }
 
-  > .dataTable {
+  >.collapes_container {
+    margin-top: 24px;
+    background-color: $white !important;
+  }
+
+  >.dataTable {
     margin-top: 24px;
   }
 
@@ -34,9 +42,11 @@
     border-radius: 8px;
     border: 1px solid nth($color-light, 2);
   }
+
   .catLevel2 {
     margin-left: 24px;
   }
+
   .catLevel3 {
     margin-left: 24px;
   }

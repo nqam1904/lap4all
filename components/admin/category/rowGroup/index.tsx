@@ -14,10 +14,10 @@ import {
 } from "@/actions/category/category";
 
 import GroupCategory from "@/components/admin/forms/groupCategory";
-import { Button } from "antd";
+import { Button, Collapse } from "antd";
 import AddCategory from "./addCategory";
-import Category from "./category";
 import CategoryOptions from "./categoryOptions";
+import Category from "./category";
 
 interface IProps {
   data: TGetAllCategories;
@@ -35,6 +35,7 @@ let initialCategory: TAddCategory = {
 
 const RowCatGroup = ({ data, categories, onReset }: IProps) => {
   const { id: groupId, name } = data;
+
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -134,7 +135,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
 
   return (
     <div className={styles.catGroupRow}>
-      <span>{name}</span>
+      {/* <span>{name}</span> */}
       <div>
         <Button onClick={() => setShowOptions(true)}>Cấu hình chi tiết</Button>
         <Button onClick={() => setShowAddCategory(true)}>Thêm danh mục</Button>
@@ -143,19 +144,20 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
         <Button
           onClick={() => setShowEdit(true)}
           variant="outlined"
-          color="primary"
+          color="default"
         >
-          Update
+          Sửa
         </Button>
         <Button
           color="danger"
           variant="solid"
           onClick={() => setShowDelete(true)}
         >
-          Delete
+          Xóa
         </Button>
       </div>
       {categories.length > 0 && (
+    
         <div className={styles.categories}>
           {categories?.map(
             (cat) =>

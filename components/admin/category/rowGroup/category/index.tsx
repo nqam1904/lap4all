@@ -240,16 +240,16 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
           <Button
             onClick={() => setShowEdit(true)}
             variant="outlined"
-            color="primary"
+            color="default"
           >
-            Update
+            Sửa
           </Button>
           <Button
             color="danger"
             variant="solid"
             onClick={() => setShowDelete(true)}
           >
-            Delete
+            Xóa
           </Button>
         </div>
       </div>

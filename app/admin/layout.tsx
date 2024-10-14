@@ -23,7 +23,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
       <body className={outfitFont.className}>
         <AntdRegistry>
           <HeaderAdmin />
-          <Layout>
+          <Layout style={{marginTop: 64}}>
             <SideBar>
               {children}
               {/* <Footer /> */}
