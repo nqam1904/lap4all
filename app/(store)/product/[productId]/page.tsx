@@ -84,7 +84,7 @@ const ProductPage = () => {
               <div className={styles.boardLoading}>
                 <SK_Box width="60%" height="14px" />
                 <div className={styles.title}>
-                  <SK_Box width="40%" height="30px" />
+                 
                   <SK_Box width="90%" height="16px" />
                 </div>
                 <div className={styles.desc}>

@@ -1,67 +1,70 @@
 @import "/public/css/variables.module.scss";
 
 .brands {
-  > .addingSection {
+  height: 100vh;
+
+  >.addingSection {
     display: flex;
     gap: 16px;
     align-items: center;
-    > input {
-      font-size: 1.4rem;
-      border-radius: 4px;
-      padding: 4px 8px;
-      color: nth($color-light, 8);
-      border: 1px solid nth($color-light, 6);
-    }
+    width: 60%;
+    margin-top: 35px;
   }
 
-  > .brandsList {
-    width: 500px;
+  >.brandsList {
     margin-top: 40px;
     font-size: 1.4rem;
     color: nth($color-light, 8);
 
-    > .list {
+    >.list {
       display: flex;
       flex-direction: column;
 
-      > .row {
-        display: flex;
-        align-items: center;
-        padding: 6px;
-        padding-left: 24px;
-        border-radius: 8px;
-        justify-content: space-between;
-        transition: background-color 0.4s;
+      >.listItem {
+        background-color: $white !important;
 
         &:hover {
           background-color: nth($color-light, 1);
         }
 
-        > .buttonsWrapper {
-          display: flex;
-          gap: 16px;
+        >.buttonsWrapper {
+          display: flex !important;
+          gap: 16px !important;
         }
       }
     }
+
   }
-}
-.deleteMsg {
-  text-align: center;
-  padding: 12px 0 24px;
-}
-.editSection {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 48px 12px;
-  > div {
+
+  .loading {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
   }
-  > span {
-    width: 100%;
-    display: block;
-    overflow-wrap: break-word;
-    color: nth($color-red, 5);
+
+  .deleteMsg {
+    text-align: center;
+    padding: 12px 0 24px;
+  }
+
+  .editSection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 48px 12px;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    >span {
+      width: 100%;
+      display: inline-block;
+      // overflow-wrap: break-word;
+      color: nth($color-red, 5);
+      font-family: inherit;
+    }
   }
 }

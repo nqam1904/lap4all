@@ -19,6 +19,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'drive.google.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'scontent.fsgn2-11.fna.fbcdn.net',
         port: '',
         pathname: '/**',

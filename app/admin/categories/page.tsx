@@ -10,6 +10,7 @@ import HeaderPage from "@/components/admin/header-page";
 import { Collapse, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import styles from "./adminCategories.module.scss";
+import { SK_Box } from "@/components/UI/skeleton";
 
 type ExpandIconPosition = "start" | "end";
 
@@ -68,7 +69,12 @@ const AdminCategories = () => {
           size="large"
         />
       ) : (
-        <Skeleton style={{ marginTop: 24 }} />
+        <div className={styles.loading}>
+          <SK_Box width="100%" height="30px" />
+          <SK_Box width="100%" height="30px" />
+          <SK_Box width="100%" height="30px" />
+          <SK_Box width="100%" height="30px" />
+        </div>
       )}
       {/* <div className={styles.dataTable}>
         {groups.length > 0 &&

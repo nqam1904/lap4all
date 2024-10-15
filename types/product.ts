@@ -85,6 +85,7 @@ export type TCartListItemDB = {
 export type TBrand = {
   id: string;
   name: string;
+  image: string;
 };
 
 export type TFilters = {

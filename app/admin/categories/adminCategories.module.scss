@@ -50,4 +50,10 @@
   .catLevel3 {
     margin-left: 24px;
   }
+  .loading{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }

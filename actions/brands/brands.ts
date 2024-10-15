@@ -1,20 +1,23 @@
 "use server";
-import { z } from "zod";
 import { db } from "@/lib/db";
 import { TBrand } from "@/types/product";
+import { z } from "zod";
 
 const ValidateUpdateBrand = z.object({
   id: z.string().min(6),
   name: z.string().min(3),
+  image: z.string().min(3),
 });
 
-export const addBrand = async (brandName: string) => {
-  if (!brandName || brandName === "") return { error: "Invalid Data!" };
+export const addBrand = async (brandName: string, image: string) => {
+  if (!brandName || brandName === "" || image === "")
+    return { error: "Invalid Data!" };
 
   try {
     const result = db.brand.create({
       data: {
         name: brandName,
+        image,
       },
     });
     if (!result) return { error: "Can't Insert Data" };
@@ -62,6 +65,7 @@ export const updateBrand = async (data: TBrand) => {
       },
       data: {
         name: data.name,
+        image: data.image
       },
     });
 

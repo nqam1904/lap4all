@@ -2,32 +2,36 @@
 import { useEffect, useState } from "react";
 import styles from "./brands.module.scss";
 
-import Button from "@/components/UI/button";
 import {
   addBrand,
   deleteBrand,
   getAllBrands,
   updateBrand,
 } from "@/actions/brands/brands";
-import { TBrand } from "@/types/product";
-import Popup from "@/components/UI/popup";
 import HeaderPage from "@/components/admin/header-page";
+import Popup from "@/components/UI/popup";
+import { TBrand } from "@/types/product";
+import { Button, Image, Input, List, message } from "antd";
 
 let selectedBrandID = "";
 const Brand = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [addValue, setAddValue] = useState("");
+  const [addLogo, setAddLogo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isListLoading, setIsListLoading] = useState(true);
   const [brandList, setBrandList] = useState<TBrand[]>([]);
   const [errorMsg, setErrorMsg] = useState("");
-
   const [showEdit, setShowEdit] = useState(false);
   const [editValue, setEditValue] = useState("");
+  const [editLogo, setEditLogo] = useState("");
   const [showDelete, setShowDelete] = useState(false);
 
   const fetchBrands = async () => {
     const response = await getAllBrands();
     if (response.error) {
+      setBrandList([]);
+      setIsListLoading(false);
     }
     if (response.res) {
       setIsListLoading(false);
@@ -40,32 +44,51 @@ const Brand = () => {
   }, []);
 
   const handleAdd = async () => {
-    if (addValue !== "") {
+    try {
       setIsLoading(true);
-      const response = await addBrand(addValue);
-      if (response.error) {
-        setIsLoading(false);
+      if (addValue !== "" && addLogo !== "") {
+        const response = await addBrand(addValue, addLogo);
+        if (response.res) {
+          setAddValue("");
+          setAddLogo("");
+          fetchBrands();
+        } else {
+          messageApi.open({
+            type: "error",
+            content: `${response.res}`,
+          });
+        }
+      } else {
+        messageApi.open({
+          type: "error",
+          content: "Vui lòng điền thông tin!",
+        });
       }
-      if (response.res) {
-        setIsLoading(false);
-        setAddValue("");
-        fetchBrands();
-      }
+    } catch (e) {
+      messageApi.open({
+        type: "error",
+        content: `${e}`,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleShowEdit = (data: TBrand) => {
     selectedBrandID = data.id;
     setEditValue(data.name);
+    setEditLogo(data.image);
     setErrorMsg("");
     setShowEdit(true);
   };
+
   const handleUpdate = async () => {
-    if (selectedBrandID !== "" && editValue !== "") {
+    if (selectedBrandID !== "" && editValue !== "" && editLogo) {
       setIsLoading(true);
       const response = await updateBrand({
         id: selectedBrandID,
         name: editValue,
+        image: editLogo,
       });
       if (response.error) {
         setIsLoading(false);
@@ -83,6 +106,7 @@ const Brand = () => {
     selectedBrandID = id;
     setShowDelete(true);
   };
+
   const handleDelete = async () => {
     if (selectedBrandID !== "") {
       setIsLoading(true);
@@ -100,48 +124,95 @@ const Brand = () => {
 
   return (
     <div className={styles.brands}>
+      {contextHolder}
       <HeaderPage />
       <div className={styles.addingSection}>
-        <input
+        <Input
           type="text"
           value={addValue}
+          placeholder="Nhập tên nhãn hiệu"
           onChange={(e) => setAddValue(e.currentTarget.value)}
+          allowClear
         />
-        <Button text="Add New Brand" disabled={isLoading} onClick={handleAdd} />
+        <Input
+          type="text"
+          value={addLogo}
+          placeholder="Nhập link logo"
+          onChange={(e) => setAddLogo(e.currentTarget.value)}
+          allowClear
+        />
+        <Button disabled={isLoading} onClick={handleAdd} loading={isLoading}>
+          Thêm nhãn hiệu
+        </Button>
       </div>
       <div className={styles.brandsList}>
-        {isListLoading ? (
-          <div>LOADING...</div>
-        ) : (
-          <div className={styles.list}>
-            {brandList.length === 0 && <div>There is No Brand!</div>}
-            {brandList.map((brand) => (
-              <div key={brand.id} className={styles.row}>
-                <span>{brand.name}</span>
-                <div className={styles.buttonsWrapper}>
-                  <Button text="Edit" onClick={() => handleShowEdit(brand)} />
-                  <Button
-                    text="Delete"
-                    onClick={() => handleShowDelete(brand.id)}
+        <div className={styles.list}>
+          <List
+            className={styles.listItem}
+            size="small"
+            bordered
+            loading={isListLoading}
+            dataSource={brandList}
+            renderItem={(item) => (
+              <List.Item
+                actions={[
+                  <div className={styles.buttonsWrapper} key="list-action">
+                    <Button
+                      variant="outlined"
+                      color="default"
+                      onClick={() => handleShowEdit(item)}
+                    >
+                      Sửa
+                    </Button>
+                    <Button
+                      color="danger"
+                      variant="solid"
+                      onClick={() => handleShowDelete(item.id)}
+                    >
+                      Xóa
+                    </Button>
+                  </div>,
+                ]}
+              >
+                <>
+                  {item.name}
+                  <Image
+                    width={100}
+                    alt="logo"
+                    src={item.image}
+                    preview={false}
                   />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                </>
+              </List.Item>
+            )}
+          />
+        </div>
       </div>
       {showEdit && (
         <Popup
-          width="400px"
-          title="Edit Brand Name"
+          width="600px"
+          title="Cập nhật"
           content={
             <div className={styles.editSection}>
               <div>
-                <span>Brand Name:</span>
-                <input
+                <span>Tên hãng:</span>
+                <Input
                   type="text"
                   value={editValue}
+                  placeholder="Nhập tên nhãn hiệu"
                   onChange={(e) => setEditValue(e.currentTarget.value)}
+                  allowClear
+                />
+              </div>
+              <span>{errorMsg}</span>
+              <div>
+                <span>Link logo:</span>
+                <Input
+                  type="text"
+                  value={editLogo}
+                  placeholder="Nhập link logo"
+                  onChange={(e) => setEditLogo(e.currentTarget.value)}
+                  allowClear
                 />
               </div>
               <span>{errorMsg}</span>
@@ -151,18 +222,21 @@ const Brand = () => {
           onCancel={() => setShowEdit(false)}
           onClose={() => setShowEdit(false)}
           onSubmit={() => handleUpdate()}
+          confirmBtnText="Xác nhận"
           cancelBtnText="No"
-          confirmBtnText="Yes"
         />
       )}
       {showDelete && (
         <Popup
           width="300px"
-          content={<div className={styles.deleteMsg}>Are You Sure?</div>}
+          content={
+            <div className={styles.deleteMsg}>Bạn có chắc muốn xóa?</div>
+          }
           isLoading={isLoading}
           onCancel={() => setShowDelete(false)}
           onClose={() => setShowDelete(false)}
           onSubmit={() => handleDelete()}
+          isDelete
           cancelBtnText="No"
           confirmBtnText="Yes"
         />
