@@ -1,9 +1,8 @@
 "use client";
 import styles from "./optionSet.module.scss";
 
-import { useState } from "react";
 import { TOptionSet, TSingleOption } from "@/types/common";
-import Button from "@/components/UI/button";
+import { useState } from "react";
 
 // -------------- ACTIONS --------------
 import {
@@ -11,6 +10,7 @@ import {
   deleteOptionSet,
   deleteSingleOption,
 } from "@/actions/category/categoryOptions";
+import { Button } from "antd";
 
 interface IProps {
   data: TOptionSet;
@@ -89,11 +89,9 @@ const OptionSet = ({ data, reloadRequest }: IProps) => {
     <div className={styles.optionSet} key={id}>
       <div className={styles.col1}>
         <span>{name}</span>
-        <Button
-          text="delete"
-          disabled={isLoading}
-          onClick={() => handleDeleteOptionSet()}
-        />
+        <Button disabled={isLoading} onClick={() => handleDeleteOptionSet()}>
+          Xóa
+        </Button>
       </div>
       <div className={styles.col2}>
         {options.map((singleOption, index) => (
@@ -105,7 +103,6 @@ const OptionSet = ({ data, reloadRequest }: IProps) => {
             </div>
             <div>
               <Button
-                text="delete"
                 onClick={() =>
                   handleDeleteSingleOption({
                     name: singleOption.name,
@@ -113,7 +110,9 @@ const OptionSet = ({ data, reloadRequest }: IProps) => {
                     optionSetID: id,
                   })
                 }
-              />
+              >
+                Xóa
+              </Button>
             </div>
           </div>
         ))}
@@ -134,11 +133,9 @@ const OptionSet = ({ data, reloadRequest }: IProps) => {
               }
             />
           </div>
-          <Button
-            text="Add"
-            disabled={isLoading}
-            onClick={() => handleAddSingleOption()}
-          />
+          <Button disabled={isLoading} onClick={() => handleAddSingleOption()}>
+            Thêm
+          </Button>
         </div>
       </div>
     </div>

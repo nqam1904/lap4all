@@ -1,14 +1,14 @@
 "use client";
 import styles from "./adminProducts.module.scss";
 
-import { useEffect, useState } from "react";
-import Button from "@/components/UI/button";
+import { addProduct, getAllProducts } from "@/actions/product/product";
 import Popup from "@/components/UI/popup";
+import HeaderPage from "@/components/admin/header-page";
 import ProductForm from "@/components/admin/product/productForm";
 import { TAddProductFormValues, TProductListItem } from "@/types/product";
-import { addProduct, getAllProducts } from "@/actions/product/product";
-import ProductListItem from "@/components/admin/product/productListItem";
-import HeaderPage from "@/components/admin/header-page";
+import { Button, Table, TableProps } from "antd";
+import { ColumnsType } from "antd/es/table";
+import { useEffect, useState } from "react";
 
 const initialForm: TAddProductFormValues = {
   name: "",
@@ -22,13 +22,50 @@ const initialForm: TAddProductFormValues = {
   categoryID: "",
   specifications: [],
 };
-
+type DataType = {
+  key: number;
+  name: string;
+  age: number;
+  address: string;
+  description: string;
+};
 const AdminProducts = () => {
   const [showProductWindow, setShowProductWindow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] =
     useState<TAddProductFormValues>(initialForm);
   const [productsList, setProductsList] = useState<TProductListItem[]>([]);
+
+  const tableProps: TableProps<TProductListItem> = {
+    bordered: true,
+    loading: isLoading,
+    size: "large",
+    // expandable,
+    // title: showTitle ? defaultTitle : undefined,
+    showHeader: true,
+    // footer: showFooter ? defaultFooter : undefined,
+    // rowSelection,
+    // scroll,
+    // tableLayout,
+  };
+
+  const tableColumns: ColumnsType<TProductListItem> = [
+    {
+      key: "name",
+      title: "Tên",
+      dataIndex: "name",
+    },
+    {
+      key: "price",
+      title: "Giá tiền",
+      dataIndex: "price",
+    },
+    {
+      key: "isAvailable",
+      title: "Tình trạng",
+      dataIndex: "isAvailable",
+    },
+  ];
 
   useEffect(() => {
     getProductsList();
@@ -55,26 +92,13 @@ const AdminProducts = () => {
     <div className={styles.adminProducts}>
       <HeaderPage />
       <div className={styles.header}>
-        <Button
-          text="Add new product"
-          onClick={() => setShowProductWindow(true)}
-        />
+        <Button type="primary" onClick={() => setShowProductWindow(true)}>
+          Thêm sản phẩm
+        </Button>
       </div>
-      <div className={styles.dataTable}>
-        {productsList.length > 0 ? (
-          <>
-            {productsList.map((product) => (
-              <ProductListItem
-                key={product.id}
-                data={product}
-                requestReload={getProductsList}
-              />
-            ))}
-          </>
-        ) : (
-          <div>There is no product!</div>
-        )}
-      </div>
+
+      <Table {...tableProps} columns={tableColumns} dataSource={productsList} />
+
       {showProductWindow && (
         <Popup
           content={
@@ -84,8 +108,8 @@ const AdminProducts = () => {
           onCancel={() => setShowProductWindow(false)}
           onClose={() => setShowProductWindow(false)}
           onSubmit={() => handleAddProduct()}
-          confirmBtnText="Add Product"
-          title="Add New Product"
+          confirmBtnText="Thêm"
+          title="Thêm sản phẩm mới"
         />
       )}
     </div>

@@ -16,14 +16,18 @@ const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-  
+
   const handleAddOption = async () => {
     try {
       setIsLoading(true);
-      if (!title || title === "") return messageApi.open({
-        type: "error",
-        content: "Vui lòng nhập tên nhóm cấu hình",
-      });;
+      if (!title || title === "") {
+        messageApi.open({
+          type: "error",
+          content: "Vui lòng nhập tên nhóm cấu hình",
+        });
+        return;
+      }
+
       const data: TSpecGroup = {
         id: categorySpecGroupID,
         specs: [],

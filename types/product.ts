@@ -64,11 +64,19 @@ export type TAddProductFormValues = {
   images: string[];
   categoryID: string;
   specifications: ProductSpec[];
+  count?: number;
 };
 
 export type TProductListItem = {
   id: string;
   name: string;
+  isAvailable: boolean;
+  brandID: string;
+  desc: string;
+  price: string;
+  salePrice?: string;
+  images: string[];
+  count?: number;
   category: {
     id: string;
     name: string;

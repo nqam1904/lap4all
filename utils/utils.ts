@@ -8,5 +8,15 @@ function generateRandomString(length: number) {
   }
   return randomString;
 }
+function formartMoneyVND(value: number) {
+  const newValue = String(value);
+  if (newValue.length > 3) {
+    return value.toLocaleString("en-us", {
+      minimumFractionDigits: 3,
+    });
+  } else {
+    return value;
+  }
+}
 
-export { generateRandomString };
+export { formartMoneyVND, generateRandomString };

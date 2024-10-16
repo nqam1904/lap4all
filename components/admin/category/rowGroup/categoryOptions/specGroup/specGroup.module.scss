@@ -8,36 +8,47 @@
   border: 1px solid nth($color-light, 3);
   padding-bottom: 8px;
 
-  > .header {
+  >.header {
     width: 100%;
     padding: 12px;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid nth($color-light, 2);
     margin-bottom: 6px;
+    align-items: center;
 
-    > div {
-      > button {
+    >.rightHeader {
+      display: flex;
+      justify-content: end;
+      margin-left: 12%;
+    }
+
+    >div {
+      >button {
         margin-left: 12px;
       }
     }
   }
-  > .specRow {
+
+  >.specRow {
     display: flex;
     padding: 8px 12px;
-    // margin: 0 8px;
     justify-content: space-between;
     align-items: center;
     border-radius: 6px;
     transition: background-color 0.3s;
-    > button {
+
+    >button {
       margin-left: 12px;
-      opacity: 0.6;
-      transition: opacity 0.8s;
+      // opacity: 0.6;
+      // transition: opacity 0.8s;
     }
+
     &:hover {
       background-color: nth($color-light, 1);
-      > button {
+      cursor: pointer;
+
+      >button {
         opacity: 1;
       }
     }

@@ -1,4 +1,8 @@
+import { TableProps } from "antd";
+
 export type TDropDown = {
   value: string;
-  text: string;
+  label: string;
 };
+
+export interface ITableProps extends TableProps {}

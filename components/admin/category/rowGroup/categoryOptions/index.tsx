@@ -68,73 +68,10 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
       <div className={styles.header}>
         <h2>{categoryName}</h2>
         <div>
-          {/* <h3
-            className={isOption ? styles.active : ""}
-            onClick={() => setIsOption(true)}
-          >
-            Options
-          </h3>
-          <h3
-            className={!isOption ? styles.active : ""}
-            onClick={() => setIsOption(false)}
-          >
-            Cấu hình
-          </h3> */}
           {/* Specifications */}
           <h3 className={styles.active}>Cấu hình</h3>
         </div>
       </div>
-      {/* {isOption ? (
-        // ------------------ OPTIONS SECTION ------------------
-        <div className={styles.tabContainer}>
-          <AddOption
-            categoryOptionId={categoryID}
-            reloadRequest={handleReloadOptions}
-          />
-          <div className={styles.optionList}>
-            {optionSetList.length > 0 ? (
-              <>
-                {optionSetList.map((optionSet) => (
-                  <OptionSet
-                    key={optionSet.id}
-                    data={optionSet}
-                    reloadRequest={handleReloadOptions}
-                  />
-                ))}
-              </>
-            ) : (
-              <div className={styles.addCategoryOption}>
-                <span>There is no Options for this category</span>
-              </div>
-            )}
-          </div>
-        </div>
-      ) : (
-        // ------------------ SPECIFICATION SECTION ------------------
-        <div className={styles.tabContainer}>
-          <AddSpecGroup
-            categorySpecGroupID={categoryID}
-            reloadRequest={handleReloadSpecs}
-          />
-          <div className={styles.specGroupList}>
-            {specGroupList.length > 0 ? (
-              <>
-                {specGroupList.map((specGroup) => (
-                  <SpecGroup
-                    key={specGroup.id}
-                    data={specGroup}
-                    reloadRequest={handleReloadSpecs}
-                  />
-                ))}
-              </>
-            ) : (
-              <div className={styles.addCategoryOption}>
-                <span>There is no Specification for this category</span>
-              </div>
-            )}
-          </div>
-        </div>
-      )} */}
 
       {/*  ------------------ SPECIFICATION SECTION ------------------  */}
       <div className={styles.tabContainer}>

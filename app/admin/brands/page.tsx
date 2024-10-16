@@ -14,6 +14,7 @@ import { TBrand } from "@/types/product";
 import { Button, Image, Input, List, message } from "antd";
 
 let selectedBrandID = "";
+
 const Brand = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [addValue, setAddValue] = useState("");
@@ -141,6 +142,16 @@ const Brand = () => {
           onChange={(e) => setAddLogo(e.currentTarget.value)}
           allowClear
         />
+        {addLogo && (
+          <Image
+            width={100}
+            alt="logo"
+            src={addLogo}
+            preview={false}
+            style={{ alignItems: "center" }}
+          />
+        )}
+
         <Button disabled={isLoading} onClick={handleAdd} loading={isLoading}>
           Thêm nhãn hiệu
         </Button>
@@ -156,10 +167,11 @@ const Brand = () => {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <div className={styles.buttonsWrapper} key="list-action">
+                  <div key="list-action">
                     <Button
                       variant="outlined"
                       color="default"
+                      style={{ marginRight: 20 }}
                       onClick={() => handleShowEdit(item)}
                     >
                       Sửa
@@ -181,6 +193,7 @@ const Brand = () => {
                     alt="logo"
                     src={item.image}
                     preview={false}
+                    style={{ alignItems: "center" }}
                   />
                 </>
               </List.Item>
@@ -213,6 +226,13 @@ const Brand = () => {
                   placeholder="Nhập link logo"
                   onChange={(e) => setEditLogo(e.currentTarget.value)}
                   allowClear
+                />
+                <Image
+                  width={100}
+                  alt="logo"
+                  src={editLogo}
+                  preview={false}
+                  style={{ alignItems: "center" }}
                 />
               </div>
               <span>{errorMsg}</span>

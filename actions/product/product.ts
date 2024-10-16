@@ -1,5 +1,4 @@
 "use server";
-import { productDetail } from "@/data/products";
 import { db } from "@/lib/db";
 import {
   TAddProductFormValues,
@@ -77,6 +76,10 @@ export const getAllProducts = async () => {
       select: {
         id: true,
         name: true,
+        desc: true,
+        images: true,
+        price: true,
+        isAvailable: true,
         category: {
           select: {
             id: true,
