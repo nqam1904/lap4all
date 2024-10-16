@@ -54,7 +54,6 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
     setButtonDisabled(true);
     try {
       const result = await addCategory(groupCategoryData);
-      console.log(result);
       if (result.error) {
         messageApi.open({
           type: "error",

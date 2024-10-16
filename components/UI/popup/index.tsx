@@ -25,7 +25,7 @@ const Popup = ({
   onClose,
   onCancel,
   onSubmit,
-  isLoading,
+  isLoading = false,
   content,
   isDelete = false,
 }: IProps) => {
@@ -51,6 +51,7 @@ const Popup = ({
           >
             {confirmBtnText || "OK"}
           </Button>
+
           <Button onClick={onCancel}>Hủy bỏ</Button>
         </div>
       </div>

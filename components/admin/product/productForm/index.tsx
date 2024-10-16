@@ -9,18 +9,18 @@ import { TAddProductFormValues, TBrand } from "@/types/product";
 import { TDropDown } from "@/types/uiElements";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { ProductSpec, SpecGroup } from "@prisma/client";
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Radio,
+  RadioChangeEvent,
+  Select,
+} from "antd";
 import { useEffect, useState } from "react";
-
-const categoryListFirstItem: TDropDown = {
-  label: "Chọn danh mục....",
-  value: "",
-};
-
-const brandListFirstItem: TDropDown = {
-  label: "Chọn nhãn hàng....",
-  value: "",
-};
 
 interface IProps {
   formValues: TAddProductFormValues;
@@ -37,15 +37,22 @@ const formItemLayout = {
     sm: { span: 20 },
   },
 };
+const optionsRadios = [
+  { label: "Còn hàng", value: true },
+  { label: "Hết hàng", value: false },
+];
 const ProductForm = ({ formValues: props, onChange }: IProps) => {
   const [form] = Form.useForm();
 
+  const [messageApi, contextHolder] = message.useMessage();
   const [categoryList, setCategoryList] = useState<TDropDown[]>([]);
   const [brandList, setBrandList] = useState<TDropDown[]>([]);
   const [selectedCategoryListIndex, setSelectedCategoryListIndex] = useState(0);
   const [selectedBrandListIndex, setSelectedBrandListIndex] = useState(0);
 
   const [categorySpecs, setCategorySpecs] = useState<SpecGroup[]>([]);
+
+  // ---------------------- GET DATA ----------------------
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -107,6 +114,8 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
     fetchBrands();
   }, []);
 
+  // ---------------------- HANDLE FORM DATA ----------------------
+
   const handleCategoryChange = (index: number) => {
     setSelectedCategoryListIndex(index);
     if (index === 0) {
@@ -154,10 +163,14 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
     onChange({ ...props, specialFeatures: newArray });
   };
 
+  const onChangeRadio = (e: RadioChangeEvent) => {
+    onChange({ ...props, isAvailable: e.target.value });
+  };
+
   return (
     <div className={styles.productForm}>
+      {contextHolder}
       <Form
-        form={form}
         labelCol={{ flex: "110px" }}
         labelAlign="left"
         labelWrap
@@ -176,8 +189,30 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
         }}
       >
         {/* name */}
-        <Form.Item name="name" label="Tên">
-          <Input placeholder="Nhập tên laptop..." allowClear />
+        <Form.Item
+          name="name"
+          label="Tên"
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng nhập tên sản phẩm!",
+            },
+          ]}
+        >
+          <Input
+            placeholder="Nhập tên laptop..."
+            allowClear
+            onChange={(e) => onChange?.({ ...props, name: e.target.value })}
+          />
+        </Form.Item>
+
+        {/* name */}
+        <Form.Item label="Tình trạng">
+          <Radio.Group
+            options={optionsRadios}
+            defaultValue={true}
+            onChange={onChangeRadio}
+          ></Radio.Group>
         </Form.Item>
 
         {/* price */}
@@ -235,6 +270,7 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
             options={brandList}
+            onChange={handleBrandChange}
           />
         </Form.Item>
 
@@ -310,10 +346,16 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
         </Form.Item>
+        <Divider plain>Cấu hình</Divider>
         {/* specifications */}
         <div className={styles.specs}>
-          <span>Cấu hình</span>
-          <div className={styles.specGroups}>
+          <div
+            className={styles.specGroups}
+            style={{
+              display: categorySpecs.length > 0 ? "block" : "flex",
+              justifyContent: categorySpecs.length > 0 ? "" : "center",
+            }}
+          >
             {categorySpecs.length > 0 ? (
               <>
                 {categorySpecs.map((specGroup, groupIndex) => (
@@ -344,7 +386,7 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
                 ))}
               </>
             ) : (
-              <span>Can not Find! </span>
+              <span>Chưa có thông tin cấu hình!</span>
             )}
           </div>
         </div>

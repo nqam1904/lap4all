@@ -1,19 +1,20 @@
 "use client";
 import styles from "./adminProducts.module.scss";
 
-import { addProduct, getAllProducts } from "@/actions/product/product";
+import { getAllProducts } from "@/actions/product/product";
 import Popup from "@/components/UI/popup";
 import HeaderPage from "@/components/admin/header-page";
 import ProductForm from "@/components/admin/product/productForm";
 import { TAddProductFormValues, TProductListItem } from "@/types/product";
-import { Button, Table, TableProps } from "antd";
+import { isEmptyObject } from "@/utils/utils";
+import { Button, message, Table, TableProps } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 
 const initialForm: TAddProductFormValues = {
   name: "",
   brandID: "",
-  specialFeatures: ["", "", ""],
+  specialFeatures: [],
   isAvailable: false,
   desc: "",
   price: "",
@@ -35,6 +36,7 @@ const AdminProducts = () => {
   const [formValues, setFormValues] =
     useState<TAddProductFormValues>(initialForm);
   const [productsList, setProductsList] = useState<TProductListItem[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const tableProps: TableProps<TProductListItem> = {
     bordered: true,
@@ -77,19 +79,38 @@ const AdminProducts = () => {
   };
 
   const handleAddProduct = async () => {
+    console.log(formValues);
     setIsLoading(true);
-    const result = await addProduct(formValues);
-    if (result.error) {
+    try {
+      if (isEmptyObject(formValues)) {
+        console.log("hello", isEmptyObject(formValues));
+        messageApi.error({
+          type: "error",
+          content: "Dữ liệu không hợp lệ, vui lòng kiểm tra lại!",
+        });
+      }
+      return;
+      // const result = await addProduct(formValues);
+      // if (result.error) {
+      //   setIsLoading(false);
+      // }
+      // if (result.res) {
+      //   setIsLoading(false);
+      //   setShowProductWindow(false);
+      // }
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content: `${error}`,
+      });
+    } finally {
       setIsLoading(false);
-    }
-    if (result.res) {
-      setIsLoading(false);
-      setShowProductWindow(false);
     }
   };
 
   return (
     <div className={styles.adminProducts}>
+      {contextHolder}
       <HeaderPage />
       <div className={styles.header}>
         <Button type="primary" onClick={() => setShowProductWindow(true)}>
