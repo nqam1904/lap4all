@@ -32,8 +32,6 @@ const defaultFilters: TFilters = {
   priceMinMax: [0, 0],
 };
 
-const imgBaseUrl = process.env.IMG_URL;
-
 const sortData: TListSort[] = [
   { sortName: "id", sortType: "desc" },
   { sortName: "id", sortType: "asc" },
@@ -57,7 +55,7 @@ const ListPage = () => {
     ...defaultFilters,
     priceMinMax: [...defaultFilters.priceMinMax],
   });
-
+  console.log(defaultFilters);
   const [isListLoading, setIsListLoading] = useState(true);
 
   useEffect(() => {
@@ -68,6 +66,7 @@ const ListPage = () => {
         sortData[sortIndex],
         appliedFilters,
       );
+      console.log(response, "response");
       if (isFilterApplied) {
         setFilters(appliedFilters);
         setProductList(response.products);

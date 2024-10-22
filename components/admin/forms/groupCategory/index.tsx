@@ -1,7 +1,7 @@
 "use client";
 import { TGetAllCategories } from "@/actions/category/category";
-import styles from "./groupCategory.module.scss";
-
+import { Form, Input } from "antd";
+import { useForm } from "antd/es/form/Form";
 interface IProps {
   errorMsg: string;
   data: TGetAllCategories;
@@ -9,48 +9,70 @@ interface IProps {
 }
 
 const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
-  // const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
+  const [form] = useForm();
   return (
-    <div className={styles.groupCategoryForm}>
-      <div className={styles.row}>
-        <span className={styles.col1}>TÊN NHÓM DANH MỤC:</span>
-        <input
-          name="name"
+    <Form
+      form={form}
+      layout="vertical"
+      autoComplete="off"
+      style={{ marginTop: 20 }}
+    >
+      <Form.Item
+        name="name"
+        label="Nhóm danh mục"
+        rules={[
+          {
+            required: true,
+            type: "string",
+            message: "Vui lòng nhập tên sản phẩm!",
+          },
+        ]}
+      >
+        <Input
+          allowClear
+          placeholder="Nhập tên danh mục..."
           value={data.name}
           onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
-          type="text"
-          placeholder="TÊN..."
         />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>URL:</span>
-        <input
-          name="url"
+      </Form.Item>
+      <Form.Item
+        name="url"
+        label="Nhóm danh mục"
+        rules={[
+          {
+            required: true,
+            type: "string",
+            message: "Vui lòng nhập link danh mục!",
+          },
+        ]}
+      >
+        <Input
           onChange={(e) => onChange({ ...data, url: e.currentTarget.value })}
-          type="text"
           placeholder="URL..."
           value={data.url}
         />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>ICON URL:</span>
-        <input
-          name="iconUrl"
+      </Form.Item>
+      <Form.Item
+        name="iconUrl"
+        label="Nhóm danh mục"
+        rules={[
+          {
+            required: true,
+            type: "string",
+            message: "Vui lòng nhập link icon!",
+          },
+        ]}
+      >
+        <Input
+          allowClear
+          placeholder="Nhập link icon danh mục..."
+          value={data.iconUrl || ""}
           onChange={(e) =>
             onChange({ ...data, iconUrl: e.currentTarget.value })
           }
-          type="text"
-          placeholder="ICON URL..."
-          value={data.iconUrl || ""}
         />
-      </div>
-
-      {errorMsg !== "" && (
-        <div className={styles.row}>
-          <span className={styles.error}>{errorMsg}</span>
-        </div>
-      )}
-    </div>
+      </Form.Item>
+    </Form>
   );
 };
 

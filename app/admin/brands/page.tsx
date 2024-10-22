@@ -11,11 +11,13 @@ import {
 import HeaderPage from "@/components/admin/header-page";
 import Popup from "@/components/UI/popup";
 import { TBrand } from "@/types/product";
-import { Button, Image, Input, List, message } from "antd";
+import { Button, Col, Form, Image, Input, List, message, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 
 let selectedBrandID = "";
 
 const Brand = () => {
+  const [form] = useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const [addValue, setAddValue] = useState("");
   const [addLogo, setAddLogo] = useState("");
@@ -44,25 +46,19 @@ const Brand = () => {
     fetchBrands();
   }, []);
 
-  const handleAdd = async () => {
+  const handleAdd = async (data: { name: string; image: string }) => {
+    console.log("jell");
     try {
       setIsLoading(true);
-      if (addValue !== "" && addLogo !== "") {
-        const response = await addBrand(addValue, addLogo);
-        if (response.res) {
-          setAddValue("");
-          setAddLogo("");
-          fetchBrands();
-        } else {
-          messageApi.open({
-            type: "error",
-            content: `${response.res}`,
-          });
-        }
+      const response = await addBrand(data.name, data.image);
+      if (response.res) {
+        form.resetFields();
+        setAddLogo("");
+        fetchBrands();
       } else {
         messageApi.open({
           type: "error",
-          content: "Vui lòng điền thông tin!",
+          content: `${response.res}`,
         });
       }
     } catch (e) {
@@ -78,7 +74,7 @@ const Brand = () => {
   const handleShowEdit = (data: TBrand) => {
     selectedBrandID = data.id;
     setEditValue(data.name);
-    setEditLogo(data.image);
+    setEditLogo(data.image || "");
     setErrorMsg("");
     setShowEdit(true);
   };
@@ -128,36 +124,69 @@ const Brand = () => {
       {contextHolder}
       <HeaderPage />
 
-      <div className={styles.addingSection}>
-        <Input
-          type="text"
-          value={addValue}
-          placeholder="Nhập tên nhãn hiệu"
-          onChange={(e) => setAddValue(e.currentTarget.value)}
-          allowClear
+      <Form
+        form={form}
+        autoComplete="off"
+        style={{ marginTop: 20 }}
+        colon={false}
+        onFinish={handleAdd}
+      >
+        <Row gutter={16}>
+          <Col span={8}>
+            <Form.Item
+              name="name"
+              label="Tên"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                  message: "Vui lòng nhập tên!",
+                },
+              ]}
+            >
+              <Input
+                value={addValue}
+                placeholder="Nhập tên nhãn hiệu"
+                // onChange={(e) => setAddValue(e.currentTarget.value)}
+                allowClear
+              />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item
+              name="image"
+              label="Logo"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                  message: "Vui lòng nhập link logo!",
+                },
+              ]}
+            >
+              <Input
+                value={addLogo}
+                placeholder="Nhập link logo"
+                onChange={(e) => setAddLogo(e.currentTarget.value)}
+                allowClear
+              />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Button htmlType="submit" disabled={isLoading} loading={isLoading}>
+              Thêm nhãn hiệu
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+      {addLogo && (
+        <Image
+          width={220}
+          alt="logo"
+          src={addLogo}
+          style={{ alignItems: "center" }}
         />
-        <Input
-          type="text"
-          value={addLogo}
-          placeholder="Nhập link logo"
-          onChange={(e) => setAddLogo(e.currentTarget.value)}
-          allowClear
-        />
-        {addLogo && (
-          <Image
-            width={100}
-            alt="logo"
-            src={addLogo}
-            preview={false}
-            style={{ alignItems: "center" }}
-          />
-        )}
-
-        <Button disabled={isLoading} onClick={handleAdd} loading={isLoading}>
-          Thêm nhãn hiệu
-        </Button>
-      </div>
-
+      )}
       <div className={styles.brandsList}>
         <div className={styles.list}>
           <List
@@ -249,7 +278,7 @@ const Brand = () => {
           cancelBtnText="No"
         />
       )}
-      
+
       {showDelete && (
         <Popup
           width="300px"

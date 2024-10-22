@@ -84,6 +84,7 @@ export const getAllProducts = async () => {
         brand: true,
         images: true,
         price: true,
+        salePrice:true,
         count: true,
         category: {
           select: {

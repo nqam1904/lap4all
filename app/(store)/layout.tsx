@@ -1,8 +1,8 @@
 "use client";
+import Footer from "@/components/store/footer";
 import StoreNavBar from "@/components/store/navbar";
 import { shoppingCartStore } from "@/store/shoppingCart";
 import { Provider } from "react-redux";
-import StoreFooter from "./../../components/store/footer/index";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +10,7 @@ const StoreLayout = ({ children }: { children: React.ReactNode }) => {
       <Provider store={shoppingCartStore}>
         <StoreNavBar />
         {children}
-        {/* <StoreFooter /> */}
+        <Footer />
       </Provider>
     </main>
   );

@@ -57,7 +57,7 @@ const AdminCategories = () => {
 
   return (
     <div className={styles.categoryList}>
-      <HeaderPage textCta="Tạo nhóm danh mục" onClick={handleAddCategories} />
+      <HeaderPage textCta="Tạo nhóm danh mục" onClick={handleAddCategories} isShowButton />
       <div className={styles.head}>
         <AddCategoryGroup
           onReset={getData}

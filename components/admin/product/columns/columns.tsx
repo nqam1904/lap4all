@@ -11,25 +11,24 @@ const tableProps: TableProps<TProductListItem> = {
 // DATA TABLE SHOW
 const tableColumns: ColumnsType<TProductListItem> = [
   {
+    key: "id",
+    title: "Mã sản phẩm",
+    dataIndex: "id",
+    align: "center",
+    width: 150,
+  },
+  {
     key: "name",
     title: "Tên sản phẩm",
     dataIndex: "name",
     align: "center",
-    width: 180,
-  },
-  {
-    key: "specialFeatures",
-    title: "Mô tả",
-    dataIndex: "specialFeatures",
-    align: "center",
-    ellipsis: true,
-    width: 180,
+    width: 150,
   },
   {
     key: "images",
     title: "Hình ảnh",
     align: "center",
-    width: 200,
+    width: 180,
     render: (_, record) => {
       const { images, name } = record;
       return (
@@ -41,6 +40,15 @@ const tableColumns: ColumnsType<TProductListItem> = [
       );
     },
   },
+  {
+    key: "specialFeatures",
+    title: "Mô tả",
+    dataIndex: "specialFeatures",
+    align: "center",
+    ellipsis: true,
+    width: 180,
+  },
+
   {
     key: "price",
     title: "Giá tiền",
@@ -60,7 +68,7 @@ const tableColumns: ColumnsType<TProductListItem> = [
     key: "isAvailable",
     title: "Tình trạng",
     align: "center",
-    width: 200,
+    width: 80,
     filters: [
       { text: "Còn hàng", value: true },
       { text: "Hết hàng", value: false },
@@ -84,6 +92,7 @@ const expandedRowRender = (data: TProductListItem) => {
       title: "Thương hiệu",
       dataIndex: "brand",
       align: "center",
+      width: 80,
       render: (_, record) => {
         const { brand } = record;
         return <div>{brand.name}</div>;
@@ -94,6 +103,7 @@ const expandedRowRender = (data: TProductListItem) => {
       title: "Danh mục",
       dataIndex: "brand",
       align: "center",
+      width: 80,
       render: (_, record) => {
         const { category } = record;
         return <div>{category.name}</div>;
@@ -101,11 +111,12 @@ const expandedRowRender = (data: TProductListItem) => {
     },
     {
       key: "salePrice",
-      title: "Giá giảm",
+      title: "sale",
       dataIndex: "salePrice",
       align: "center",
+      width: 80,
       render: (_, record) => {
-        const { salePrice = '0' } = record;
+        const { salePrice } = record;
         return (
           <div>
             {parseInt(salePrice).toLocaleString("vi-VN", {
@@ -120,11 +131,13 @@ const expandedRowRender = (data: TProductListItem) => {
       key: "count",
       title: "Số lượng",
       dataIndex: "count",
+      width: 80,
       align: "center",
     },
   ];
   return (
     <Table
+      bordered
       rowKey={(record) => record?.id}
       columns={expandColumns}
       dataSource={[data]}

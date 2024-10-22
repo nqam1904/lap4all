@@ -8,9 +8,10 @@ import {
 } from "@/components/admin/product/columns/columns";
 import { useStyle } from "@/hooks/useStyles";
 import { TProductListItem } from "@/types/product";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Button, message, Popconfirm, Space, Table, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./adminProducts.module.scss";
@@ -25,6 +26,23 @@ const AdminProducts = () => {
   const [productsList, setProductsList] = useState<TProductListItem[]>([]);
 
   const columnsAction: ColumnsType<TProductListItem> = [
+    {
+      key: "preview",
+      title: "Preivew",
+      align: "center",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <Tooltip title="Xem nhanh">
+              <Link href={`/product/${record.id}`} target="_blank">
+                <EyeOutlined />
+              </Link>
+            </Tooltip>
+          </Space>
+        );
+      },
+    },
     {
       key: "action",
       title: "Chức năng",
@@ -99,7 +117,11 @@ const AdminProducts = () => {
   return (
     <div className={styles.adminProducts}>
       {contextHolder}
-      <HeaderPageAdmin textCta="Thêm sản phẩm" onClick={addProduct} isShowButton />
+      <HeaderPageAdmin
+        textCta="Thêm sản phẩm"
+        onClick={addProduct}
+        isShowButton
+      />
       <Table
         {...tableProps}
         loading={isLoading}
@@ -112,7 +134,7 @@ const AdminProducts = () => {
         className={styleTable.customTable}
         dataSource={productsList}
         pagination={{ pageSize: 10 }}
-        scroll={{ y: 55 * 5 }}
+        scroll={{ y: 100 * 5 }}
       />
     </div>
   );

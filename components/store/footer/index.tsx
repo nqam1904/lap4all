@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "./footer.module.scss";
-import Link from "next/link";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -8,6 +5,9 @@ import {
   SearchIcon,
   XIcon,
 } from "@/components/icons/svgIcons";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./footer.module.scss";
 
 const Footer = () => {
   return (
@@ -26,18 +26,18 @@ const Footer = () => {
             <input
               type="text"
               className={styles.searchInput}
-              placeholder="Search"
+              placeholder="Tìm kiếm"
             />
             <SearchIcon width={16} />
           </div>
         </div>
         <section className={styles.middle}>
           <div>
-            <h3>Contact Us</h3>
-            <span>Got Question? Call us 24/7</span>
+            <h3>Liên hệ chúng tôi</h3>
+            <span>Đặt câu hỏi và tư vấn? Gọi chúng tôi 24/7</span>
             <h2>+49 30 575909881</h2>
-            <span>685 Market Street, San Francisco, CA 94105, US</span>
-            <span>nonamecompany@justportfolio.com</span>
+            <span>685 Phan Đăng Lưu, Quận Phú Nhuận, TP Hồ Chí Minh</span>
+            <span>vpthinh98@gmail.com</span>
           </div>
           <div>
             <h3>Categories</h3>
@@ -53,21 +53,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link href={""}>Smart Phones</Link>
-              </li>
-              <li>
-                <Link href={""}>OLED Smart TVs</Link>
-              </li>
-              <li>
-                <Link href={""}>Keyboard & Mouse</Link>
-              </li>
-              <li>
-                <Link href={""}>Video Games</Link>
-              </li>
-              <li>
-                <Link href={""}>Sports & Outdoors</Link>
-              </li>
-              <li>
-                <Link href={""}>Smart Watches</Link>
               </li>
             </ul>
           </div>
@@ -103,7 +88,7 @@ const Footer = () => {
       </div>
       <section className={styles.bottom}>
         <div className={`${styles.footerWrapper} storeContainer`}>
-          <span>© 2024 Laptop Store. All Rights Reserved.</span>
+          <span>© 2024 Laptop Lap4All Store.</span>
           <div className={styles.legal}>
             <ul>
               <li>
