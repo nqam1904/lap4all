@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
-import styles from "./groupCategory.module.scss";
 import { TGetAllCategories } from "@/actions/category/category";
+import styles from "./groupCategory.module.scss";
 
 interface IProps {
   errorMsg: string;
@@ -45,37 +44,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
           value={data.iconUrl || ""}
         />
       </div>
-      {/* <div className={styles.row}>
-        <span className={styles.col1}>ICON Size:</span>
-        {data.iconSize && (
-          <>
-            <input
-              name="iconSize1"
-              type="number"
-              onChange={(e) =>
-                onChange({
-                  ...data,
-                  iconSize: [parseInt(e.currentTarget.value) | 0, iconSize[1]],
-                })
-              }
-              placeholder="0"
-              value={data.iconSize[0]}
-            />
-            <input
-              name="iconSize2"
-              type="number"
-              placeholder="0"
-              onChange={(e) =>
-                onChange({
-                  ...data,
-                  iconSize: [iconSize[0], parseInt(e.currentTarget.value) | 0],
-                })
-              }
-              value={data.iconSize[1]}
-            />
-          </>
-        )}
-      </div> */}
+
       {errorMsg !== "" && (
         <div className={styles.row}>
           <span className={styles.error}>{errorMsg}</span>

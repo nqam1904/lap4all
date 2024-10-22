@@ -20,6 +20,7 @@ const ValidateAddProduct = z.object({
   categoryID: z.string().min(6),
   price: z.string().min(1),
   salePrice: z.string(),
+  count: z.string(),
   specifications: z.array(
     z.object({
       specGroupID: z.string().min(6),
@@ -34,6 +35,7 @@ const convertStringToFloat = (str: string) => {
 };
 
 export const addProduct = async (data: TAddProductFormValues) => {
+  console.log(data, "data insert");
   if (!ValidateAddProduct.safeParse(data).success)
     return { error: "Invalid Data!" };
 
@@ -42,7 +44,6 @@ export const addProduct = async (data: TAddProductFormValues) => {
     const salePrice = data.salePrice
       ? convertStringToFloat(data.salePrice)
       : null;
-
     const result = db.category.update({
       where: {
         id: data.categoryID,
@@ -59,6 +60,7 @@ export const addProduct = async (data: TAddProductFormValues) => {
             salePrice: salePrice,
             images: [...data.images],
             specs: data.specifications,
+            count: data.count,
           },
         },
       },
@@ -72,14 +74,17 @@ export const addProduct = async (data: TAddProductFormValues) => {
 
 export const getAllProducts = async () => {
   try {
-    const result: TProductListItem[] | null = await db.product.findMany({
+    const result: TProductListItem[] | any = await db.product.findMany({
       select: {
         id: true,
         name: true,
+        specialFeatures: true,
+        isAvailable: true,
         desc: true,
+        brand: true,
         images: true,
         price: true,
-        isAvailable: true,
+        count: true,
         category: {
           select: {
             id: true,
@@ -124,16 +129,16 @@ export const getOneProduct = async (productID: string) => {
       },
     });
     if (!result) return { error: "Invalid Data!" };
-
+    console.log(result, "result");
     const specifications = await generateSpecTable(result.specs);
     if (!specifications || specifications.length === 0)
-      return { error: "Invalid Date" };
+      return { error: "Invalid Spec" };
 
     const pathArray: TPath[] | null = await getPathByCategoryID(
       result.category.id,
       result.category.parentID,
     );
-    if (!pathArray || pathArray.length === 0) return { error: "Invalid Date" };
+    if (!pathArray || pathArray.length === 0) return { error: "Invalid Path" };
 
     const { specs, ...others } = result;
     const mergedResult: TProductPageInfo = {
@@ -229,12 +234,17 @@ const getPathByCategoryID = async (
   categoryID: string,
   parentID: string | null,
 ) => {
+  console.log(categoryID, parentID, "getPathByCategoryID");
   try {
     if (!categoryID || categoryID === "") return null;
-    if (!parentID || parentID === "") return null;
+    // if (!parentID || parentID === "") return null;
     const result: TPath[] = await db.category.findMany({
       where: {
-        OR: [{ id: categoryID }, { id: parentID }, { parentID: null }],
+        OR: [
+          { id: categoryID },
+          parentID ? { id: parentID } : {},
+          { parentID: null },
+        ],
       },
       select: {
         id: true,

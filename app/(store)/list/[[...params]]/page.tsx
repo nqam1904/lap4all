@@ -63,28 +63,22 @@ const ListPage = () => {
   useEffect(() => {
     const getProductsList = async () => {
       setIsListLoading(true);
-
-      const response = await getList(
+      const response: any = await getList(
         pathName,
         sortData[sortIndex],
         appliedFilters,
       );
-      console.log(response, "response");
-      if (response.error || !response.products || !response.subCategories)
-        if (isFilterApplied) {
-          // return router.push("/");
-
-          setFilters(appliedFilters);
-          setProductList(response.products);
-          setIsListLoading(false);
-        } else {
-          const filtersFromDB = getFiltersFromProductList(response.products);
-          setFilters(filtersFromDB);
-          setSubCategories(response.subCategories);
-          setProductList(response.products);
-
-          setIsListLoading(false);
-        }
+      if (isFilterApplied) {
+        setFilters(appliedFilters);
+        setProductList(response.products);
+        setIsListLoading(false);
+      } else {
+        const filtersFromDB = getFiltersFromProductList(response.products);
+        setFilters(filtersFromDB);
+        setSubCategories(response.subCategories);
+        setProductList(response.products);
+        setIsListLoading(false);
+      }
     };
 
     getProductsList();
@@ -143,6 +137,7 @@ const ListPage = () => {
     return true;
   };
   let isFilterChanged: boolean = defineFilterChangeStatus();
+
   const handleApplyFilter = () => {
     const newFilter: TFilters = {
       brands: JSON.parse(JSON.stringify(filters.brands)),
@@ -174,7 +169,6 @@ const ListPage = () => {
       if (isFilterApplied) return "filterLoading";
       return "pageLoading";
     }
-
     if (productList.length > 0) return "filledProductList";
 
     if (isFilterApplied) return "filterHasNoProduct";
@@ -195,10 +189,7 @@ const ListPage = () => {
         {productList.map((product) => (
           <ProductCard
             key={product.id}
-            imgUrl={[
-              imgBaseUrl + product.images[0],
-              imgBaseUrl + product.images[1],
-            ]}
+            imgUrl={[product.images[0], product.images[1]]}
             name={product.name}
             price={product.price}
             isAvailable={product.isAvailable}
@@ -212,7 +203,7 @@ const ListPage = () => {
     categoryHasNoProduct: <NoItem pageHeader={getPageHeader()} />,
     filterHasNoProduct: (
       <div className={styles.noItemContainer}>
-        <span> There is no product!</span>
+        <span> Không tìm thấy sản phẩm!</span>
         <Button text="Reset Filters" onClick={handleResetFilters} />
       </div>
     ),
@@ -223,7 +214,7 @@ const ListPage = () => {
       <div className={styles.header}>
         <h1>{getPageHeader()}</h1>
         <div className={styles.links}>
-          <Link href={"/"}>Home</Link>
+          <Link href={"/"}>Trang chủ</Link>
           {params.map((item, index) => (
             <Link key={index} href={getLink(params, index)}>
               {item[0].toUpperCase() + item.slice(1)}

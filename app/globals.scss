@@ -1,3 +1,5 @@
+@import "/public/css/variables.module.scss";
+
 :root {
   font-size: 0.625rem;
 }
@@ -112,4 +114,9 @@ button {
   .storeContainer {
     padding: 0 24px;
   }
+}
+// overide ant css
+.ant-layout {
+  background: $white !important;
+  margin-top: 20px;
 }

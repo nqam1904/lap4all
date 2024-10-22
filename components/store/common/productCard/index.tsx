@@ -23,7 +23,7 @@ const ProductCard = ({
     >
       {!isAvailable && (
         <div className={styles.outOfStock}>
-          <span> Out of Stock</span>
+          <span>Hết hàng</span>
         </div>
       )}
       <div className={styles.imageWrapper}>
@@ -43,27 +43,33 @@ const ProductCard = ({
               <div className={styles.oldPrice}>
                 <span>
                   -
-                  {(100 - (dealPrice / price) * 100).toLocaleString("en-us", {
-                    maximumFractionDigits: 0,
+                  {(100 - (dealPrice / price) * 100).toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
                   })}
                   %
                 </span>
                 <span>
                   giá gốc{" "}
-                  {price.toLocaleString("en-us", { minimumFractionDigits: 2 })}
-                  VNĐ
+                  {price.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </span>
               </div>
               <span className={styles.mainPrice}>
-                {dealPrice.toLocaleString("en-us", {
-                  minimumFractionDigits: 2,
+                {dealPrice.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
                 })}
-                VNĐ
               </span>
             </React.Fragment>
           ) : (
             <span className={styles.mainPrice}>
-              {price.toLocaleString("en-us", { minimumFractionDigits: 2 })}VNĐ
+              {price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
             </span>
           )}
         </div>

@@ -10,17 +10,17 @@ interface IProps {
   images?: string[];
 }
 
-const Gallery = ({ images }: any) => {
+const Gallery:React.FC<IProps> = ({ images }: IProps) => {
   const [showZoom, setShowZoom] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <div className={styles.gallery}>
       <div className={styles.imageList}>
         {images ? (
-          images.map((image: { url: string }, index: number) => (
+          images.map((image: string, index: number) => (
             <Image
-              src={image?.url}
-              alt=""
+              src={image}
+              alt="product_image"
               width={64}
               height={64}
               key={index}
@@ -39,7 +39,7 @@ const Gallery = ({ images }: any) => {
       <div className={styles.imageWrapper}>
         {images ? (
           <Image
-            src={images[selectedIndex].url}
+            src={images[selectedIndex]}
             alt=""
             fill
             sizes="(max-width:700px)"
@@ -60,17 +60,17 @@ const Gallery = ({ images }: any) => {
               <CloseIcon width={16} />
             </button>
             <Image
-              src={images[selectedIndex].url}
+              src={images[selectedIndex]}
               alt=""
               fill
               sizes="(max-width:700px)"
             />
           </div>
           <div className={styles.imageList}>
-            {images.map((image, index) => (
+            {images.map((image: string, index: number) => (
               <Image
-                src={image.url}
-                alt=""
+                src={image}
+                alt="image"
                 width={64}
                 height={64}
                 key={index}

@@ -127,6 +127,7 @@ const Brand = () => {
     <div className={styles.brands}>
       {contextHolder}
       <HeaderPage />
+
       <div className={styles.addingSection}>
         <Input
           type="text"
@@ -156,6 +157,7 @@ const Brand = () => {
           Thêm nhãn hiệu
         </Button>
       </div>
+
       <div className={styles.brandsList}>
         <div className={styles.list}>
           <List
@@ -201,6 +203,7 @@ const Brand = () => {
           />
         </div>
       </div>
+
       {showEdit && (
         <Popup
           width="600px"
@@ -246,6 +249,7 @@ const Brand = () => {
           cancelBtnText="No"
         />
       )}
+      
       {showDelete && (
         <Popup
           width="300px"

@@ -21,7 +21,7 @@ function SideMenu() {
   const selectSideMenu = () => {
     const getItemMenu = dashboardSideMenu.find((x) => x?.link === pathname);
     if (pathname.startsWith(`${getItemMenu?.link || ""}`)) {
-      setSelectedKey([`${getItemMenu.key}`]);
+      setSelectedKey([`${getItemMenu?.key}`]);
     }
   };
 

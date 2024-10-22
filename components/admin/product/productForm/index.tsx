@@ -52,67 +52,7 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
 
   const [categorySpecs, setCategorySpecs] = useState<SpecGroup[]>([]);
 
-  // ---------------------- GET DATA ----------------------
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const result = await getAllCategoriesJSON();
-      if (result.res) {
-        setCategoryList(convertJSONtoDropdownList(result.res));
-      }
-    };
-
-    const fetchBrands = async () => {
-      const result = await getAllBrands();
-      if (result.res) {
-        setBrandList(convertBrandsToDropdownList(result.res));
-      }
-    };
-
-    const convertJSONtoDropdownList = (json: TGroupJSON[]): TDropDown[] => {
-      const dropDownData: TDropDown[] = [];
-      json.forEach((group) => {
-        dropDownData.push({
-          label: group.group.name,
-          value: group.group.id,
-        });
-        group.categories.forEach((category) => {
-          dropDownData.push({
-            label: group.group.name + " - " + category.category.name,
-            value: category.category.id,
-          });
-          category.subCategories.forEach((sub) => {
-            dropDownData.push({
-              label:
-                group.group.name +
-                " - " +
-                category.category.name +
-                " - " +
-                sub.name,
-              value: sub.id,
-            });
-          });
-        });
-      });
-
-      return dropDownData;
-    };
-
-    const convertBrandsToDropdownList = (brandList: TBrand[]): TDropDown[] => {
-      const dropDownData: TDropDown[] = [];
-      brandList.forEach((brand) => {
-        dropDownData.push({
-          label: brand.name,
-          value: brand.id,
-        });
-      });
-
-      return dropDownData;
-    };
-
-    fetchCategories();
-    fetchBrands();
-  }, []);
+ 
 
   // ---------------------- HANDLE FORM DATA ----------------------
 

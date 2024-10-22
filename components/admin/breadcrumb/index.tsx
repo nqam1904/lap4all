@@ -20,9 +20,7 @@ const BreadCrumbAdmin: React.FC<TBreadcrumbAdmin> = ({ pathname }) => {
             </>
           ),
         },
-        {
-          title: <span>{itemBreadCrumb.title}</span>,
-        },
+        itemBreadCrumb,
       ]}
     />
   );

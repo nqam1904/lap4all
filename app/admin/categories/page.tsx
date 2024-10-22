@@ -7,10 +7,10 @@ import {
 import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
 import CatGroupRow from "@/components/admin/category/rowGroup";
 import HeaderPage from "@/components/admin/header-page";
-import { Collapse, Skeleton } from "antd";
+import { SK_Box } from "@/components/UI/skeleton";
+import { Collapse } from "antd";
 import { useEffect, useState } from "react";
 import styles from "./adminCategories.module.scss";
-import { SK_Box } from "@/components/UI/skeleton";
 
 type ExpandIconPosition = "start" | "end";
 
@@ -18,6 +18,9 @@ const AdminCategories = () => {
   const [allCategories, setAllCategories] = useState<TGetAllCategories[]>([]);
   const [expandIconPosition, setExpandIconPosition] =
     useState<ExpandIconPosition>("start");
+  const [showWindow, setShowWindow] = useState<boolean>(false);
+
+  const handleAddCategories = () => setShowWindow(true);
 
   const getData = async () => {
     const data = await getAllCategories();
@@ -54,9 +57,13 @@ const AdminCategories = () => {
 
   return (
     <div className={styles.categoryList}>
-      <HeaderPage />
+      <HeaderPage textCta="Tạo nhóm danh mục" onClick={handleAddCategories} />
       <div className={styles.head}>
-        <AddCategoryGroup onReset={getData} />
+        <AddCategoryGroup
+          onReset={getData}
+          showWindow={showWindow}
+          onClose={setShowWindow}
+        />
       </div>
 
       {groups.length ? (
@@ -76,18 +83,6 @@ const AdminCategories = () => {
           <SK_Box width="100%" height="30px" />
         </div>
       )}
-      {/* <div className={styles.dataTable}>
-        {groups.length > 0 &&
-          groups.map((group) => (
-            <div className={styles.catLevel1} key={group.id}>
-              <CatGroupRow
-                onReset={getData}
-                data={group}
-                categories={categories}
-              />
-            </div>
-          ))}
-      </div> */}
     </div>
   );
 };

@@ -86,6 +86,7 @@ model Product {
   brand           Brand         @relation(fields: [brandID], references: [id])
   brandID         String        @db.ObjectId
   PageVisit       PageVisit[]
+  count           String
 }
 
 type ProductSpec {

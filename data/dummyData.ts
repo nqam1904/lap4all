@@ -19,7 +19,6 @@ const dashboardSideMenu: any[] = [
     name: EMenu.PRODUCTS,
     link: "/admin/products",
   },
-
   {
     key: 4,
     title: "Thương hiệu",

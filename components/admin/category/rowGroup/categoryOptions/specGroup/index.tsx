@@ -7,7 +7,7 @@ import {
   deleteSpecGroup,
 } from "@/actions/category/categoryOptions";
 import { TSingleSpec, TSpecGroup } from "@/types/common";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { DownOutlined, PlusOutlined, UpOutlined } from "@ant-design/icons";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 
@@ -117,7 +117,7 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
             disabled={isLoading}
             onClick={handleAddSingleSpec}
           >
-            Thêm chi tiết
+            <PlusOutlined />
           </Button>
         </div>
         <div className={styles.iconContainer}>

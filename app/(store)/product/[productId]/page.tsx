@@ -12,24 +12,23 @@ import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
 import Gallery from "@/components/store/productPage/gallery";
 import ProductBoard from "@/components/store/productPage/productBoard";
 
+import { getOneProduct } from "@/actions/product/product";
 import { SK_Box } from "@/components/UI/skeleton";
-import { productDetail } from "@/data/products";
+import { TProductPageInfo } from "@/types/product";
 import Image from "next/image";
 
 const ProductPage = () => {
   const router = useRouter();
   const { productId } = useParams<{ productId: string[] }>();
-  // const [productInfo, setProductInfo] = useState<
-  //   TProductPageInfo | null | undefined
-  // >(null);
-  const [productInfo, setProductInfo] = useState<any | null | undefined>(null);
+  const [productInfo, setProductInfo] = useState<
+    TProductPageInfo | null | undefined
+  >(null);
+
   if (!productId) router.push("/");
 
   useEffect(() => {
     const getProductFromDB = async () => {
-      // const response = await getOneProduct(productId.toString());
-      const response = { res: productDetail };
-      // if (response.error) router.push("/");
+      const response = await getOneProduct(productId.toString());
       setProductInfo(response.res);
     };
     getProductFromDB();
@@ -58,7 +57,9 @@ const ProductPage = () => {
               {productInfo ? (
                 <React.Fragment>
                   <Link href={"/"}>Trang chủ</Link>
-                  {productInfo.path.map((item, index) => generatePath(index))}
+                  {productInfo.path.map((item: any, index: number) =>
+                    generatePath(index),
+                  )}
                 </React.Fragment>
               ) : (
                 <SK_Box width="60%" height="15px" />
@@ -84,7 +85,6 @@ const ProductPage = () => {
               <div className={styles.boardLoading}>
                 <SK_Box width="60%" height="14px" />
                 <div className={styles.title}>
-                 
                   <SK_Box width="90%" height="16px" />
                 </div>
                 <div className={styles.desc}>
@@ -105,7 +105,7 @@ const ProductPage = () => {
             <div className={styles.specification}>
               <h2>Thông tin kỹ thuật</h2>
               {productInfo ? (
-                productInfo.specifications.map((spec, index) => (
+                productInfo.specifications.map((spec: any, index: number) => (
                   <section key={index} className={styles.specGroup}>
                     <div className={styles.specGroupHead}>
                       <button>
@@ -114,7 +114,7 @@ const ProductPage = () => {
                       </button>
                       <h3>{spec.groupName}</h3>
                     </div>
-                    {spec.specs.map((row, index) => (
+                    {spec.specs.map((row: any, index: number) => (
                       <div key={index} className={styles.row}>
                         <div className={styles.leftCol}>
                           <span>{row.name}</span>

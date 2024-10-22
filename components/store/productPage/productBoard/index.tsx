@@ -56,18 +56,17 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
       <h1>{name}</h1>
       <span className={styles.shortDesc}>{shortDesc}</span>
       <hr />
-      {/* <div className={styles.specialFeatures}>
+      <div className={styles.specialFeatures}>
         {specialFeatures &&
           specialFeatures?.map((feature, index) => (
             <span key={index}>{feature}</span>
           ))}
-      </div> */}
+      </div>
       <h2 className={styles.price}>
-        {(dealPrice ? dealPrice : price).toLocaleString("en-us", {
-          minimumIntegerDigits: 2,
-          minimumFractionDigits: 0,
-        })}{" "}
-        VNĐ
+        {(dealPrice ? dealPrice : price).toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        })}
       </h2>
 
       {dealPrice && (
@@ -75,29 +74,28 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
           <span className={styles.dealAmount}>
             {`
             Tiết kiệm
-            ${(price - dealPrice).toLocaleString("en-us", {
-              minimumIntegerDigits: 2,
-              minimumFractionDigits: 0,
-            })} VNĐ
+            ${(price - dealPrice).toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
             `}
           </span>
           <span className={styles.oldPrice}>
-            Giá gốc{" "}
-            {price.toLocaleString("en-us", {
-              minimumIntegerDigits: 2,
-              minimumFractionDigits: 0,
-            })}{" "}
-            VNĐ
+            Giá gốc:{" "}
+            {price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
           </span>
         </div>
       )}
       <hr />
 
       {/* ----------------- ADD TO CART SECTION ----------------- */}
-      <section className={styles.addToCartSection}>
+      {/* <section className={styles.addToCartSection}>
         <Quantity onChange={handleQuantityChange} quantity={quantity} />
         <AddToCartButton cartItemData={cartItemData} disabled={!isAvailable} />
-      </section>
+      </section> */}
     </div>
   );
 };
